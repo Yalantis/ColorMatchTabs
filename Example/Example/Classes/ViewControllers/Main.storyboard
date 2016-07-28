@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gek-RD-9TH">
+    <dependencies>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="WWT-8T-jL7">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="gek-RD-9TH" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="aGm-nW-deq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="s2V-v5-uSP" kind="relationship" relationship="rootViewController" id="Mw4-Er-wzS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GHY-C7-nha" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-760.5" y="701.5"/>
+        </scene>
+        <!--HAUNT-->
+        <scene sceneID="aHG-x5-r4h">
+            <objects>
+                <viewController title="HAUNT" id="s2V-v5-uSP" customClass="ExampleViewContoller" customModule="CircleMenu" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fgx-YW-5aZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="nV1-uL-Hsk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DNi-RV-Jeu">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="u5F-Up-Ltv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RS8-U4-qHQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-250.5" y="701.5"/>
+        </scene>
+    </scenes>
+</document>
