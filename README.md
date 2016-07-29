@@ -6,6 +6,8 @@
 
 Inspired by [this project on Dribbble](https://dribbble.com/shots/2702517-Review-App-Concept)
 
+![Preview](Resources/preview.gif)
+
 ## Requirements
 
 * iOS 9.0
