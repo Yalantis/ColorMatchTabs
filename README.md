@@ -17,7 +17,7 @@ Inspired by [this project on Dribbble](https://dribbble.com/shots/2702517-Review
 
 ####[CocoaPods](http://cocoapods.org)
 
-```
+```ruby
 pod 'ColorMatchTabs', '~> 1.0'
 ```
 
@@ -32,7 +32,7 @@ github "Yalantis/ColorMatchTabs" ~> 1.0
 
 To setup and customize the component you should implement `ColorMatchTabsViewControllerDataSource` for `ColorMatchTabsViewController`. 
 
-```
+```swift
 public protocol ColorMatchTabsDataSource: class {
     
     func numberOfItems(inController controller: ColorMatchTabsViewController) -> Int
@@ -49,7 +49,7 @@ public protocol ColorMatchTabsDataSource: class {
 
 To customize popup view controller create a subclass of `PopoverViewController` and set it in the view controller: 
 
-```
+```swift
 tabsViewController.popoverViewController = ExamplePopoverViewController()
 ```
 
