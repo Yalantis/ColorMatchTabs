@@ -15,7 +15,7 @@ Inspired by [this project on Dribbble](https://dribbble.com/shots/2702517-Review
 
 ## Installation
 
-####[CocoaPods](http://cocoapods.org)
+####[CocoaPods](https://cocoapods.org/)
 
 ```ruby
 pod 'ColorMatchTabs', '~> 1.0'
