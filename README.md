@@ -55,7 +55,7 @@ tabsViewController.popoverViewController = ExamplePopoverViewController()
 
 ## Support
 
-Feel free to [open open issuses](https://github.com/Yalantis/ColorMatchTabs/issues/new) with any suggestions, bug reports, feature requests, questions.
+Feel free to [open issuses](https://github.com/Yalantis/ColorMatchTabs/issues/new) with any suggestions, bug reports, feature requests, questions.
 
 ## Let us know!
 
