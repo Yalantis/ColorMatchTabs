@@ -95,10 +95,7 @@ public class ScrollMenu: UIScrollView {
         let first = min(index, indexOfVisibleItem) + 1
         let last = max(index, indexOfVisibleItem)
         hideContent(forRange: first..<last)
-
-        let width = viewControllers[index].view.bounds.width
-        let contentOffsetX = width * CGFloat(index)
-        setContentOffset(CGPoint(x: contentOffsetX, y: contentOffset.y), animated: true)
+        updateContentOffset(withIndex: index)
     }
  
     public func reloadData() {
@@ -116,6 +113,13 @@ public class ScrollMenu: UIScrollView {
         layoutContent()
     }
     
+    
+    public override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        updateContentOffset(withIndex: indexOfVisibleItem)
+    }
+    
 }
 
 private extension ScrollMenu {
@@ -130,6 +134,14 @@ private extension ScrollMenu {
                 width: bounds.width,
                 height: bounds.height 
             )
+        }
+    }
+    
+    private func updateContentOffset(withIndex index: Int) {
+        if viewControllers.count > index {
+            let width = viewControllers[index].view.bounds.width
+            let contentOffsetX = width * CGFloat(index)
+            setContentOffset(CGPoint(x: contentOffsetX, y: contentOffset.y), animated: true)
         }
     }
     
