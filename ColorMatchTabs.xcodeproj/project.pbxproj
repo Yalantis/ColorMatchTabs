@@ -8,12 +8,42 @@
 
 /* Begin PBXBuildFile section */
 		C529890A1D4630440058C829 /* ColorMatchTabs.h in Headers */ = {isa = PBXBuildFile; fileRef = C52989091D4630440058C829 /* ColorMatchTabs.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C5897A751D5AFDFD0013D181 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A5E1D5AFDFD0013D181 /* Constants.swift */; };
+		C5897A761D5AFDFD0013D181 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A601D5AFDFD0013D181 /* Array+Safe.swift */; };
+		C5897A771D5AFDFD0013D181 /* CAAnimation+OpacityAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A611D5AFDFD0013D181 /* CAAnimation+OpacityAnimation.swift */; };
+		C5897A781D5AFDFD0013D181 /* UIImage+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A621D5AFDFD0013D181 /* UIImage+Bundle.swift */; };
+		C5897A791D5AFDFD0013D181 /* TabSwitcherMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A641D5AFDFD0013D181 /* TabSwitcherMenuItem.swift */; };
+		C5897A7A1D5AFDFD0013D181 /* CircleTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A661D5AFDFD0013D181 /* CircleTransition.swift */; };
+		C5897A7B1D5AFDFD0013D181 /* ColorMatchTabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A681D5AFDFD0013D181 /* ColorMatchTabsViewController.swift */; };
+		C5897A7C1D5AFDFD0013D181 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A691D5AFDFD0013D181 /* PopoverViewController.swift */; };
+		C5897A7D1D5AFDFD0013D181 /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A6B1D5AFDFD0013D181 /* CircleMenu.swift */; };
+		C5897A7E1D5AFDFD0013D181 /* ColorTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A6C1D5AFDFD0013D181 /* ColorTabs.swift */; };
+		C5897A7F1D5AFDFD0013D181 /* ExtendedNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A6D1D5AFDFD0013D181 /* ExtendedNavigationBar.swift */; };
+		C5897A801D5AFDFD0013D181 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A6E1D5AFDFD0013D181 /* MenuView.swift */; };
+		C5897A811D5AFDFD0013D181 /* ScrollMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A6F1D5AFDFD0013D181 /* ScrollMenu.swift */; };
+		C5897A821D5AFDFD0013D181 /* VerticalGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5897A701D5AFDFD0013D181 /* VerticalGradientView.swift */; };
+		C5897A851D5AFDFD0013D181 /* MenuAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5897A741D5AFDFD0013D181 /* MenuAssets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C52989061D4630440058C829 /* ColorMatchTabs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ColorMatchTabs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C52989091D4630440058C829 /* ColorMatchTabs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorMatchTabs.h; sourceTree = "<group>"; };
 		C529890B1D4630440058C829 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5897A5E1D5AFDFD0013D181 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C5897A601D5AFDFD0013D181 /* Array+Safe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
+		C5897A611D5AFDFD0013D181 /* CAAnimation+OpacityAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAAnimation+OpacityAnimation.swift"; sourceTree = "<group>"; };
+		C5897A621D5AFDFD0013D181 /* UIImage+Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Bundle.swift"; sourceTree = "<group>"; };
+		C5897A641D5AFDFD0013D181 /* TabSwitcherMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabSwitcherMenuItem.swift; sourceTree = "<group>"; };
+		C5897A661D5AFDFD0013D181 /* CircleTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTransition.swift; sourceTree = "<group>"; };
+		C5897A681D5AFDFD0013D181 /* ColorMatchTabsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMatchTabsViewController.swift; sourceTree = "<group>"; };
+		C5897A691D5AFDFD0013D181 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
+		C5897A6B1D5AFDFD0013D181 /* CircleMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenu.swift; sourceTree = "<group>"; };
+		C5897A6C1D5AFDFD0013D181 /* ColorTabs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTabs.swift; sourceTree = "<group>"; };
+		C5897A6D1D5AFDFD0013D181 /* ExtendedNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedNavigationBar.swift; sourceTree = "<group>"; };
+		C5897A6E1D5AFDFD0013D181 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		C5897A6F1D5AFDFD0013D181 /* ScrollMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollMenu.swift; sourceTree = "<group>"; };
+		C5897A701D5AFDFD0013D181 /* VerticalGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalGradientView.swift; sourceTree = "<group>"; };
+		C5897A741D5AFDFD0013D181 /* MenuAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MenuAssets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,10 +76,81 @@
 		C52989081D4630440058C829 /* ColorMatchTabs */ = {
 			isa = PBXGroup;
 			children = (
+				C5897A731D5AFDFD0013D181 /* Resources */,
+				C5897A5D1D5AFDFD0013D181 /* Classes */,
 				C52989091D4630440058C829 /* ColorMatchTabs.h */,
 				C529890B1D4630440058C829 /* Info.plist */,
 			);
 			path = ColorMatchTabs;
+			sourceTree = "<group>";
+		};
+		C5897A5D1D5AFDFD0013D181 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C5897A5E1D5AFDFD0013D181 /* Constants.swift */,
+				C5897A5F1D5AFDFD0013D181 /* Extensions */,
+				C5897A631D5AFDFD0013D181 /* Models */,
+				C5897A651D5AFDFD0013D181 /* Transition */,
+				C5897A671D5AFDFD0013D181 /* ViewController */,
+				C5897A6A1D5AFDFD0013D181 /* Views */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		C5897A5F1D5AFDFD0013D181 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C5897A601D5AFDFD0013D181 /* Array+Safe.swift */,
+				C5897A611D5AFDFD0013D181 /* CAAnimation+OpacityAnimation.swift */,
+				C5897A621D5AFDFD0013D181 /* UIImage+Bundle.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C5897A631D5AFDFD0013D181 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C5897A641D5AFDFD0013D181 /* TabSwitcherMenuItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C5897A651D5AFDFD0013D181 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				C5897A661D5AFDFD0013D181 /* CircleTransition.swift */,
+			);
+			path = Transition;
+			sourceTree = "<group>";
+		};
+		C5897A671D5AFDFD0013D181 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C5897A681D5AFDFD0013D181 /* ColorMatchTabsViewController.swift */,
+				C5897A691D5AFDFD0013D181 /* PopoverViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C5897A6A1D5AFDFD0013D181 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C5897A6B1D5AFDFD0013D181 /* CircleMenu.swift */,
+				C5897A6C1D5AFDFD0013D181 /* ColorTabs.swift */,
+				C5897A6D1D5AFDFD0013D181 /* ExtendedNavigationBar.swift */,
+				C5897A6E1D5AFDFD0013D181 /* MenuView.swift */,
+				C5897A6F1D5AFDFD0013D181 /* ScrollMenu.swift */,
+				C5897A701D5AFDFD0013D181 /* VerticalGradientView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C5897A731D5AFDFD0013D181 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C5897A741D5AFDFD0013D181 /* MenuAssets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +221,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5897A851D5AFDFD0013D181 /* MenuAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +232,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5897A7C1D5AFDFD0013D181 /* PopoverViewController.swift in Sources */,
+				C5897A801D5AFDFD0013D181 /* MenuView.swift in Sources */,
+				C5897A7E1D5AFDFD0013D181 /* ColorTabs.swift in Sources */,
+				C5897A761D5AFDFD0013D181 /* Array+Safe.swift in Sources */,
+				C5897A821D5AFDFD0013D181 /* VerticalGradientView.swift in Sources */,
+				C5897A791D5AFDFD0013D181 /* TabSwitcherMenuItem.swift in Sources */,
+				C5897A7F1D5AFDFD0013D181 /* ExtendedNavigationBar.swift in Sources */,
+				C5897A781D5AFDFD0013D181 /* UIImage+Bundle.swift in Sources */,
+				C5897A771D5AFDFD0013D181 /* CAAnimation+OpacityAnimation.swift in Sources */,
+				C5897A7B1D5AFDFD0013D181 /* ColorMatchTabsViewController.swift in Sources */,
+				C5897A7D1D5AFDFD0013D181 /* CircleMenu.swift in Sources */,
+				C5897A811D5AFDFD0013D181 /* ScrollMenu.swift in Sources */,
+				C5897A7A1D5AFDFD0013D181 /* CircleTransition.swift in Sources */,
+				C5897A751D5AFDFD0013D181 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +394,7 @@
 				C52989101D4630440058C829 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
