@@ -34,6 +34,11 @@ class MenuView: UIView {
         layoutIfNeeded()
     }
     
+    func setCircleMenuButtonHidden(hidden: Bool) {
+        circleMenuButton.hidden = hidden
+        shadowView.hidden = hidden
+    }
+    
 }
 
 // Init
@@ -54,11 +59,6 @@ private extension MenuView {
         scrollMenu = ScrollMenu()
         addSubview(scrollMenu)
         
-        shadowView = VerticalGradientView()
-        shadowView.topColor = UIColor(white: 1, alpha: 0)
-        shadowView.bottomColor = UIColor(white: 1, alpha: 1)
-        addSubview(shadowView)
-        
         navigationBar = ExtendedNavigationBar()
         navigationBar.backgroundColor = .whiteColor()
         addSubview(navigationBar)
@@ -67,7 +67,14 @@ private extension MenuView {
         tabs.userInteractionEnabled = true
         navigationBar.addSubview(tabs)
         
+        shadowView = VerticalGradientView()
+        shadowView.hidden = true
+        shadowView.topColor = UIColor(white: 1, alpha: 0)
+        shadowView.bottomColor = UIColor(white: 1, alpha: 1)
+        addSubview(shadowView)
+        
         circleMenuButton = UIButton()
+        circleMenuButton.hidden = true
         circleMenuButton.setImage(UIImage(namedInCurrentBundle: "circle_menu"), forState: .Normal)
         circleMenuButton.adjustsImageWhenHighlighted = false
         addSubview(circleMenuButton)

@@ -35,6 +35,9 @@ public class ColorMatchTabsViewController: UITabBarController {
         didSet {
             popoverViewController?.menu.dataSource = self
             popoverViewController?.dataSource = self
+            
+            let hidePopoverButton = popoverViewController == nil
+            _view.setCircleMenuButtonHidden(hidePopoverButton)
         }
     }
     
