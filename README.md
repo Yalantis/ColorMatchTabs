@@ -8,6 +8,8 @@ Inspired by [this project on Dribbble](https://dribbble.com/shots/2702517-Review
 
 ![Preview](Resources/preview.gif)
 
+Also, read how it was done in [our blog](https://yalantis.com/blog/how-we-developed-colormatchtabs-animation-for-ios/)
+
 ## Requirements
 
 * iOS 9.0
