@@ -57,6 +57,7 @@ private extension MenuView {
     
     func createSubviews() {
         scrollMenu = ScrollMenu()
+        scrollMenu.showsHorizontalScrollIndicator = false
         addSubview(scrollMenu)
         
         navigationBar = ExtendedNavigationBar()

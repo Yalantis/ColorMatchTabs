@@ -47,12 +47,12 @@ public class ColorMatchTabsViewController: UITabBarController {
         }
     }
     
-    private var _view: MenuView! {
-        return view as! MenuView
-    }
-    
     private var icons: [UIImageView] = []
     private let circleTransition = CircleTransition()
+    
+    var _view: MenuView! {
+        return view as! MenuView
+    }
     
     public override func loadView() {
         view = MenuView()
