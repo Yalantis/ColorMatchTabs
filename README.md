@@ -32,6 +32,8 @@ github "Yalantis/ColorMatchTabs" ~> 1.0
 
 ## How to use
 
+### Complete screen
+
 To setup and customize the component you should implement `ColorMatchTabsViewControllerDataSource` for `ColorMatchTabsViewController`. 
 
 ```swift
@@ -54,6 +56,16 @@ To customize popup view controller create a subclass of `PopoverViewController` 
 ```swift
 tabsViewController.popoverViewController = ExamplePopoverViewController()
 ```
+
+### Customization
+
+The component contains of:
+- top tabbar
+- scrollable content view
+- plus button
+- popover view controller
+ 
+Menu view controller aggregates the elements described above. If you want to fully customize or rearrange the elements, just create your own view controller instead of `MenuViewController`.
 
 ## Support
 
