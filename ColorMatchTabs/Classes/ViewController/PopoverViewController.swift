@@ -108,7 +108,7 @@ private extension PopoverViewController {
 // actions
 private extension PopoverViewController {
     
-    @objc func hidePopover(sender: AnyObject?) {
+    @objc func hidePopover(sender: AnyObject? = nil) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -213,6 +213,10 @@ extension PopoverViewController: CircleMenuDelegate {
     public func circleMenuWillHideItems(circleMenu: CircleMenu) {
         moveIconsToDefaultPositions()
         hideContentMenu()
+    }
+    
+    public func circleMenu(circleMenu: CircleMenu, didSelectItemAt index: Int) {
+        hidePopover()
     }
     
 }
