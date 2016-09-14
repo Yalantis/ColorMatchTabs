@@ -30,6 +30,12 @@ public class ColorMatchTabsViewController: UITabBarController {
         }
     }
     
+    @IBInspectable public var scrollEnabled = true {
+        didSet {
+            updateScrollEnabled()
+        }
+    }
+    
     public let titleLabel = UILabel()
     public var popoverViewController: PopoverViewController? {
         didSet {
@@ -67,6 +73,7 @@ public class ColorMatchTabsViewController: UITabBarController {
         setupScrollMenu()
         setupCircleMenu()
         updateNavigationBar(forSelectedIndex: 0)
+        updateScrollEnabled()
     }
     
     public func selectItem(at index: Int) {
@@ -149,6 +156,9 @@ private extension ColorMatchTabsViewController {
         _view.scrollMenu.backgroundColor = color.colorWithAlphaComponent(0.2)
     }
     
+    func updateScrollEnabled() {
+        _view.scrollMenu.scrollEnabled = scrollEnabled
+    }
 }
 
 // animations
