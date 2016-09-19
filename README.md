@@ -1,6 +1,6 @@
 # ColorMatchTabs
 
-![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg)
+![Swift 2.3.x](https://img.shields.io/badge/Swift-2.3.x-orange.svg)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/ColorMatchTabs.svg)](https://img.shields.io/cocoapods/v/GuillotineMenu.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
@@ -13,7 +13,8 @@ Also, read how it was done in [our blog](https://yalantis.com/blog/how-we-develo
 ## Requirements
 
 * iOS 9.0
-* Swift 2.2
+* Swift 2.3
+* Xcode 8
 
 ## Installation
 
