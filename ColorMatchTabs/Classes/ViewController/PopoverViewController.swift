@@ -10,6 +10,12 @@ import UIKit
 
 private let ContentPadding: CGFloat = 20
 
+@objc public protocol PopoverViewControllerDelegate: class {
+
+    func popoverViewController(popoverViewController: PopoverViewController, didSelectItemAt index: Int)
+    
+}
+
 @objc public protocol PopoverViewControllerDataSource: class {
     
     func numberOfItems(inPopoverViewController popoverViewController: PopoverViewController) -> Int
@@ -22,6 +28,7 @@ private let ContentPadding: CGFloat = 20
 public class PopoverViewController: UIViewController {
     
     public weak var dataSource: PopoverViewControllerDataSource?
+    public weak var delegate: PopoverViewControllerDelegate?
     public let contentView = UIView()
     
     var highlightedItemIndex: Int!
@@ -217,6 +224,7 @@ extension PopoverViewController: CircleMenuDelegate {
     
     public func circleMenu(circleMenu: CircleMenu, didSelectItemAt index: Int) {
         hidePopover()
+        delegate?.popoverViewController(self, didSelectItemAt: index)
     }
     
 }

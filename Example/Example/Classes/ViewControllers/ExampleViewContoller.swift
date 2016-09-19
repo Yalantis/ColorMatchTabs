@@ -17,6 +17,7 @@ class ExampleViewContoller: ColorMatchTabsViewController {
         titleLabel.font = UIFont.navigationTitleFont()
         // to hide bottom button remove the following line
         popoverViewController = ExamplePopoverViewController()
+        popoverViewController?.delegate = self
         
         dataSource = self
         reloadData()
@@ -48,6 +49,14 @@ extension ExampleViewContoller: ColorMatchTabsViewControllerDataSource {
     
     func tabsViewController(controller: ColorMatchTabsViewController, tintColorAt index: Int) -> UIColor {
         return TabItemsProvider.items[index].tintColor
+    }
+    
+}
+
+extension ExampleViewContoller: PopoverViewControllerDelegate {
+
+    func popoverViewController(popoverViewController: PopoverViewController, didSelectItemAt index: Int) {
+        selectItem(at: index)
     }
     
 }
