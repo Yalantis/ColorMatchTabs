@@ -32,15 +32,15 @@ extension CircleTransition: UIViewControllerAnimatedTransitioning {
         self.transitionContext = transitionContext
 
         guard let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey),
-        fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey),
-            containerView = transitionContext.containerView() else {
+        fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) else {
             return
         }
-        containerView.addSubview(toViewController.view)
+
+        transitionContext.containerView().addSubview(toViewController.view)
         
         let needShow = mode == .Show
         if !needShow {
-            containerView.addSubview(fromViewController.view)
+            transitionContext.containerView().addSubview(fromViewController.view)
         }
         
         let animatedViewController = needShow ? toViewController : fromViewController
@@ -62,8 +62,12 @@ extension CircleTransition: UIViewControllerAnimatedTransitioning {
         maskLayerAnimation.duration = transitionDuration(transitionContext)
         maskLayer.addAnimation(maskLayerAnimation, forKey: "path")
     }
+
+}
+
+extension CircleTransition: CAAnimationDelegate {
     
-    override public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+    public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         guard let transitionContext = transitionContext else {
             return
         }
@@ -71,5 +75,5 @@ extension CircleTransition: UIViewControllerAnimatedTransitioning {
         transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
         transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)?.view.layer.mask = nil
     }
-
+    
 }
