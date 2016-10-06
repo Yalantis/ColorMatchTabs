@@ -26,15 +26,15 @@ public class ScrollMenu: UIScrollView {
     @IBOutlet public weak var menuDelegate: ScrollMenuDelegate?
     @IBOutlet public weak var dataSource: ScrollMenuDataSource?
     
-    public var indexOfVisibleItem: Int {
+    public var destinationIndex = 0
+
+    private var indexOfVisibleItem: Int {
         if bounds.width > 0 {
-            return Int(round(contentOffset.x / bounds.width))
+            return min(Int(round(contentOffset.x / bounds.width)), viewControllers.count - 1)
         }
         return 0
     }
-    
     private var previousIndex = 0
-    private var destinationIndex: Int?
     private var manualSelection = false
     
     private var viewControllers: [UIViewController] = [] {
@@ -45,7 +45,7 @@ public class ScrollMenu: UIScrollView {
     
     override public var contentOffset: CGPoint {
         didSet {
-            if let destinationIndex = destinationIndex where manualSelection && destinationIndex != indexOfVisibleItem {
+            if manualSelection && destinationIndex != indexOfVisibleItem {
                 return
             }
             if !manualSelection {
@@ -55,9 +55,11 @@ public class ScrollMenu: UIScrollView {
             
             if indexOfVisibleItem != previousIndex {
                 previousIndex = indexOfVisibleItem
-                destinationIndex = nil
+                if dragging {
+                    destinationIndex = indexOfVisibleItem
+                }
                 
-                menuDelegate?.scrollMenu?(self, didSelectedItemAt: indexOfVisibleItem)
+                menuDelegate?.scrollMenu?(self, didSelectedItemAt: destinationIndex)
             }
         }
     }
@@ -95,7 +97,7 @@ public class ScrollMenu: UIScrollView {
         let first = min(index, indexOfVisibleItem) + 1
         let last = max(index, indexOfVisibleItem)
         hideContent(forRange: first..<last)
-        updateContentOffset(withIndex: index)
+        updateContentOffset(withIndex: index, animated: true)
     }
  
     public func reloadData() {
@@ -117,7 +119,7 @@ public class ScrollMenu: UIScrollView {
     public override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        updateContentOffset(withIndex: indexOfVisibleItem)
+        updateContentOffset(withIndex: destinationIndex, animated: false)
     }
     
 }
@@ -137,11 +139,11 @@ private extension ScrollMenu {
         }
     }
     
-    private func updateContentOffset(withIndex index: Int) {
+    private func updateContentOffset(withIndex index: Int, animated: Bool) {
         if viewControllers.count > index {
             let width = viewControllers[index].view.bounds.width
             let contentOffsetX = width * CGFloat(index)
-            setContentOffset(CGPoint(x: contentOffsetX, y: contentOffset.y), animated: true)
+            setContentOffset(CGPoint(x: contentOffsetX, y: contentOffset.y), animated: animated)
         }
     }
     

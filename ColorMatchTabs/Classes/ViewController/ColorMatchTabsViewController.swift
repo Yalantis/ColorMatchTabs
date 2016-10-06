@@ -242,7 +242,7 @@ private extension ColorMatchTabsViewController {
     
     @objc func changeContent(sender: ColorTabs) {
         updateNavigationBar(forSelectedIndex: sender.selectedSegmentIndex)
-        if _view.scrollMenu.indexOfVisibleItem != sender.selectedSegmentIndex {
+        if _view.scrollMenu.destinationIndex != sender.selectedSegmentIndex {
             _view.scrollMenu.selectItem(atIndex: sender.selectedSegmentIndex)
         }
     }
