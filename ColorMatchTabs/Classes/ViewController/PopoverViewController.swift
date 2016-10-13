@@ -12,7 +12,7 @@ private let ContentPadding: CGFloat = 20
 
 @objc public protocol PopoverViewControllerDelegate: class {
 
-    func popoverViewController(popoverViewController: PopoverViewController, didSelectItemAt index: Int)
+    func popoverViewController(_ popoverViewController: PopoverViewController, didSelectItemAt index: Int)
     
 }
 
@@ -20,25 +20,25 @@ private let ContentPadding: CGFloat = 20
     
     func numberOfItems(inPopoverViewController popoverViewController: PopoverViewController) -> Int
     
-    func popoverViewController(popoverViewController: PopoverViewController, iconAt index: Int) -> UIImage
-    func popoverViewController(popoverViewController: PopoverViewController, hightlightedIconAt index: Int) -> UIImage
+    func popoverViewController(_ popoverViewController: PopoverViewController, iconAt index: Int) -> UIImage
+    func popoverViewController(_ popoverViewController: PopoverViewController, hightlightedIconAt index: Int) -> UIImage
     
 }
 
-public class PopoverViewController: UIViewController {
+open class PopoverViewController: UIViewController {
     
-    public weak var dataSource: PopoverViewControllerDataSource?
-    public weak var delegate: PopoverViewControllerDelegate?
-    public let contentView = UIView()
+    open weak var dataSource: PopoverViewControllerDataSource?
+    open weak var delegate: PopoverViewControllerDelegate?
+    open let contentView = UIView()
     
     var highlightedItemIndex: Int!
     let menu: CircleMenu = CircleMenu()
     
-    private var icons: [UIImageView] = []
-    private var topConstraint: NSLayoutConstraint!
-    private var bottomConstraint: NSLayoutConstraint!
+    fileprivate var icons: [UIImageView] = []
+    fileprivate var topConstraint: NSLayoutConstraint!
+    fileprivate var bottomConstraint: NSLayoutConstraint!
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         setupContentView()
@@ -46,13 +46,13 @@ public class PopoverViewController: UIViewController {
         view.layoutIfNeeded()
     }
     
-    public override func viewWillAppear(animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         menu.triggerMenu()
     }
     
-    public func reloadData() {
+    open func reloadData() {
         guard let dataSource = dataSource else {
             return
         }
@@ -66,8 +66,8 @@ public class PopoverViewController: UIViewController {
             let iconImageView = UIImageView(frame: CGRect(origin: origin, size: size))
             
             iconImageView.image = dataSource.popoverViewController(self, hightlightedIconAt: index)
-            iconImageView.contentMode = .Center
-            iconImageView.hidden = true
+            iconImageView.contentMode = .center
+            iconImageView.isHidden = true
             
             view.addSubview(iconImageView)
             icons.append(iconImageView)
@@ -84,13 +84,13 @@ private extension PopoverViewController {
         view.addSubview(contentView)
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor, constant: ContentPadding).active = true
-        contentView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor, constant: -ContentPadding).active = true
+        contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: ContentPadding).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ContentPadding).isActive = true
         
-        topConstraint = contentView.topAnchor.constraintEqualToAnchor(view.topAnchor, constant: view.bounds.height)
-        bottomConstraint = contentView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: view.bounds.height)
-        topConstraint.active = true
-        bottomConstraint.active = true
+        topConstraint = contentView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.bounds.height)
+        bottomConstraint = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.bounds.height)
+        topConstraint.isActive = true
+        bottomConstraint.isActive = true
     }
     
     func setupMenu() {
@@ -101,13 +101,13 @@ private extension PopoverViewController {
         menu.image = image
         menu.delegate = self
         view.addSubview(menu)
-        menu.addTarget(self, action: #selector(hidePopover(_:)), forControlEvents: .TouchUpInside)
+        menu.addTarget(self, action: #selector(hidePopover(_:)), for: .touchUpInside)
         
         menu.translatesAutoresizingMaskIntoConstraints = false
-        menu.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: PlusButtonButtonOffset).active = true
-        menu.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        menu.widthAnchor.constraintEqualToConstant(image.size.width).active = true
-        menu.heightAnchor.constraintEqualToConstant(image.size.height).active = true
+        menu.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: PlusButtonButtonOffset).isActive = true
+        menu.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        menu.widthAnchor.constraint(equalToConstant: image.size.width).isActive = true
+        menu.heightAnchor.constraint(equalToConstant: image.size.height).isActive = true
     }
     
 }
@@ -115,8 +115,8 @@ private extension PopoverViewController {
 // actions
 private extension PopoverViewController {
     
-    @objc func hidePopover(sender: AnyObject? = nil) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @objc func hidePopover(_ sender: AnyObject? = nil) {
+        dismiss(animated: true, completion: nil)
     }
     
 }
@@ -125,9 +125,9 @@ private extension PopoverViewController {
 private extension PopoverViewController {
     
     func moveIconsToDefaultPositions() {
-        for (index, iconImageView) in icons.enumerate() {
-            UIView.animateWithDuration(
-                AnimationDuration,
+        for (index, iconImageView) in icons.enumerated() {
+            UIView.animate(
+                withDuration: AnimationDuration,
                 delay: 0,
                 usingSpringWithDamping: 0.8,
                 initialSpringVelocity: 3,
@@ -151,11 +151,11 @@ private extension PopoverViewController {
     }
     
     func moveIconsToCircle() {
-        for (index, iconImageView) in icons.enumerate() {
-            iconImageView.hidden = false
+        for (index, iconImageView) in icons.enumerated() {
+            iconImageView.isHidden = false
             
-            UIView.animateWithDuration(
-                AnimationDuration,
+            UIView.animate(
+                withDuration: AnimationDuration,
                 delay: 0,
                 usingSpringWithDamping: 0.95,
                 initialSpringVelocity: 3,
@@ -169,18 +169,18 @@ private extension PopoverViewController {
         }
     }
     
-    private func showContentView() {
+    func showContentView() {
         let count = dataSource!.numberOfItems(inPopoverViewController: self)
         let center = menu.centerOfItem(atIndex: count / 2)
         let bottomOffset = view.bounds.height - center.y + menu.itemDimension / 2 + ContentPadding
         
-        contentView.layer.addAnimation(CAAnimation.opacityAnimation(withDuration: AnimationDuration, initialValue: 0, finalValue: 1), forKey: nil)
+        contentView.layer.add(CAAnimation.opacityAnimation(withDuration: AnimationDuration, initialValue: 0, finalValue: 1), forKey: nil)
         contentView.alpha = 1
         
         topConstraint.constant = ContentPadding
         bottomConstraint.constant = -bottomOffset
-        UIView.animateWithDuration(
-            AnimationDuration,
+        UIView.animate(
+            withDuration: AnimationDuration,
             delay: 0,
             usingSpringWithDamping: 0.7,
             initialSpringVelocity: 3,
@@ -192,15 +192,15 @@ private extension PopoverViewController {
         )
     }
     
-    private func hideContentMenu() {
-        contentView.layer.addAnimation(CAAnimation.opacityAnimation(withDuration: AnimationDuration, initialValue: 1, finalValue: 0), forKey: nil)
+    func hideContentMenu() {
+        contentView.layer.add(CAAnimation.opacityAnimation(withDuration: AnimationDuration, initialValue: 1, finalValue: 0), forKey: nil)
         contentView.alpha = 0
         
         topConstraint.constant += view.bounds.height
         bottomConstraint.constant += view.bounds.height
         
-        UIView.animateWithDuration(
-            AnimationDuration,
+        UIView.animate(
+            withDuration: AnimationDuration,
             animations: {
                 self.view.layoutIfNeeded()
             },
@@ -212,17 +212,17 @@ private extension PopoverViewController {
 
 extension PopoverViewController: CircleMenuDelegate {
     
-    public func circleMenuWillDisplayItems(circleMenu: CircleMenu) {
+    public func circleMenuWillDisplayItems(_ circleMenu: CircleMenu) {
         moveIconsToCircle()
         showContentView()
     }
 
-    public func circleMenuWillHideItems(circleMenu: CircleMenu) {
+    public func circleMenuWillHideItems(_ circleMenu: CircleMenu) {
         moveIconsToDefaultPositions()
         hideContentMenu()
     }
     
-    public func circleMenu(circleMenu: CircleMenu, didSelectItemAt index: Int) {
+    public func circleMenu(_ circleMenu: CircleMenu, didSelectItemAt index: Int) {
         hidePopover()
         delegate?.popoverViewController(self, didSelectItemAt: index)
     }

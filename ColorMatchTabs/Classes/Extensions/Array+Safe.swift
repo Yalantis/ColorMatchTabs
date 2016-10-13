@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension CollectionType {
+extension Array {
 
-    subscript (safe index: Index) -> Generator.Element? {
+    subscript (safe index: Int) -> Iterator.Element? {
         return indices.contains(index) ? self[index] : nil
     }
     

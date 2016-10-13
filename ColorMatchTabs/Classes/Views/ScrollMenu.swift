@@ -10,40 +10,40 @@ import UIKit
 
 @objc public protocol ScrollMenuDelegate: UIScrollViewDelegate {
     
-    optional func scrollMenu(scrollMenu: ScrollMenu, didSelectedItemAt index: Int)
+    @objc optional func scrollMenu(_ scrollMenu: ScrollMenu, didSelectedItemAt index: Int)
     
 }
 
 @objc public protocol ScrollMenuDataSource: class {
     
-    func numberOfItemsInScrollMenu(scrollMenu: ScrollMenu) -> Int
-    func scrollMenu(scrollMenu: ScrollMenu, viewControllerAtIndex index: Int) -> UIViewController
+    func numberOfItemsInScrollMenu(_ scrollMenu: ScrollMenu) -> Int
+    func scrollMenu(_ scrollMenu: ScrollMenu, viewControllerAtIndex index: Int) -> UIViewController
     
 }
 
-public class ScrollMenu: UIScrollView {
+open class ScrollMenu: UIScrollView {
     
-    @IBOutlet public weak var menuDelegate: ScrollMenuDelegate?
-    @IBOutlet public weak var dataSource: ScrollMenuDataSource?
+    @IBOutlet open weak var menuDelegate: ScrollMenuDelegate?
+    @IBOutlet open weak var dataSource: ScrollMenuDataSource?
     
-    public var destinationIndex = 0
+    open var destinationIndex = 0
 
-    private var indexOfVisibleItem: Int {
+    fileprivate var indexOfVisibleItem: Int {
         if bounds.width > 0 {
             return min(Int(round(contentOffset.x / bounds.width)), viewControllers.count - 1)
         }
         return 0
     }
-    private var previousIndex = 0
-    private var manualSelection = false
+    fileprivate var previousIndex = 0
+    fileprivate var manualSelection = false
     
-    private var viewControllers: [UIViewController] = [] {
+    fileprivate var viewControllers: [UIViewController] = [] {
         didSet {
             layoutContent()
         }
     }
     
-    override public var contentOffset: CGPoint {
+    override open var contentOffset: CGPoint {
         didSet {
             if manualSelection && destinationIndex != indexOfVisibleItem {
                 return
@@ -55,7 +55,7 @@ public class ScrollMenu: UIScrollView {
             
             if indexOfVisibleItem != previousIndex {
                 previousIndex = indexOfVisibleItem
-                if dragging {
+                if isDragging {
                     destinationIndex = indexOfVisibleItem
                 }
                 
@@ -76,17 +76,17 @@ public class ScrollMenu: UIScrollView {
         commonInit()
     }
     
-    private func commonInit() {
-        pagingEnabled = true
+    fileprivate func commonInit() {
+        isPagingEnabled = true
     }
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         layoutContent()
     }
     
-    public func selectItem(atIndex index: Int) {
+    open func selectItem(atIndex index: Int) {
         guard indexOfVisibleItem != index else {
             return
         }
@@ -100,7 +100,7 @@ public class ScrollMenu: UIScrollView {
         updateContentOffset(withIndex: index, animated: true)
     }
  
-    public func reloadData() {
+    open func reloadData() {
         guard let dataSource = dataSource else {
             return
         }
@@ -116,7 +116,7 @@ public class ScrollMenu: UIScrollView {
     }
     
     
-    public override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
         updateContentOffset(withIndex: destinationIndex, animated: false)
@@ -129,7 +129,7 @@ private extension ScrollMenu {
     func layoutContent() {
         contentSize = CGSize(width: bounds.width * CGFloat(viewControllers.count), height: bounds.height)
         
-        for (index, viewController) in viewControllers.enumerate() {
+        for (index, viewController) in viewControllers.enumerated() {
             viewController.view.frame = CGRect(
                 x: bounds.width * CGFloat(index),
                 y: 0,
@@ -139,7 +139,7 @@ private extension ScrollMenu {
         }
     }
     
-    private func updateContentOffset(withIndex index: Int, animated: Bool) {
+    func updateContentOffset(withIndex index: Int, animated: Bool) {
         if viewControllers.count > index {
             let width = viewControllers[index].view.bounds.width
             let contentOffsetX = width * CGFloat(index)
@@ -148,14 +148,14 @@ private extension ScrollMenu {
     }
     
     func hideContent(forRange range: Range<Int>) {
-        viewControllers.enumerate().forEach { index, viewController in
-            viewController.view.hidden = range.contains(index)
+        viewControllers.enumerated().forEach { index, viewController in
+            viewController.view.isHidden = range.contains(index)
         }
     }
 
     func showAllContent() {
          viewControllers.forEach { viewController in
-            viewController.view.hidden = false
+            viewController.view.isHidden = false
         }
     }
     

@@ -13,7 +13,7 @@ Also, read how it was done in [our blog](https://yalantis.com/blog/how-we-develo
 ## Requirements
 
 * iOS 9.0
-* Swift 2.3
+* Swift 3
 * Xcode 8
 
 ## Installation
@@ -21,14 +21,14 @@ Also, read how it was done in [our blog](https://yalantis.com/blog/how-we-develo
 ####[CocoaPods](https://cocoapods.org/)
 
 ```ruby
-pod 'ColorMatchTabs', '~> 1.0'
+pod 'ColorMatchTabs', '~> 2.0'
 ```
 
 #### [Carthage](https://github.com/Carthage/Carthage)
 
 
 ```
-github "Yalantis/ColorMatchTabs" ~> 1.0
+github "Yalantis/ColorMatchTabs" ~> 2.0
 ```
 
 ## How to use

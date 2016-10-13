@@ -10,19 +10,19 @@ import UIKit
 
 @IBDesignable class VerticalGradientView: UIView {
     
-    @IBInspectable var topColor: UIColor = .whiteColor() {
+    @IBInspectable var topColor: UIColor = .white {
         didSet {
             updateColors()
         }
     }
     
-    @IBInspectable var bottomColor: UIColor = .blackColor() {
+    @IBInspectable var bottomColor: UIColor = .black {
         didSet {
             updateColors()
         }
     }
 
-    private let gradientLayer = CAGradientLayer()
+    fileprivate let gradientLayer = CAGradientLayer()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,11 +59,11 @@ import UIKit
 private extension VerticalGradientView {
     
     func commonInit() {
-        layer.insertSublayer(gradientLayer, atIndex: 0)
+        layer.insertSublayer(gradientLayer, at: 0)
     }
     
     func updateColors() {
-        gradientLayer.colors = [topColor.CGColor, bottomColor.CGColor]
+        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
     }
     
     func updateSize() {

@@ -10,38 +10,38 @@ import UIKit
 
 private let HighlighterViewOffScreenOffset: CGFloat = 44
 
-private let SwitchAnimationDuration: NSTimeInterval = 0.3
-private let HighlighterAnimationDuration: NSTimeInterval = SwitchAnimationDuration / 2
+private let SwitchAnimationDuration: TimeInterval = 0.3
+private let HighlighterAnimationDuration: TimeInterval = SwitchAnimationDuration / 2
 
 @objc public protocol ColorTabsDataSource: class {
     
     func numberOfItems(inTabSwitcher tabSwitcher: ColorTabs) -> Int
-    func tabSwitcher(tabSwitcher: ColorTabs, titleAt index: Int) -> String
-    func tabSwitcher(tabSwitcher: ColorTabs, iconAt index: Int) -> UIImage
-    func tabSwitcher(tabSwitcher: ColorTabs, hightlightedIconAt index: Int) -> UIImage
-    func tabSwitcher(tabSwitcher: ColorTabs, tintColorAt index: Int) -> UIColor
+    func tabSwitcher(_ tabSwitcher: ColorTabs, titleAt index: Int) -> String
+    func tabSwitcher(_ tabSwitcher: ColorTabs, iconAt index: Int) -> UIImage
+    func tabSwitcher(_ tabSwitcher: ColorTabs, hightlightedIconAt index: Int) -> UIImage
+    func tabSwitcher(_ tabSwitcher: ColorTabs, tintColorAt index: Int) -> UIColor
     
 }
 
-public class ColorTabs: UIControl {
+open class ColorTabs: UIControl {
     
-    public weak var dataSource: ColorTabsDataSource?
+    open weak var dataSource: ColorTabsDataSource?
     
     /// Text color for titles.
-    public var titleTextColor: UIColor = .whiteColor()
+    open var titleTextColor: UIColor = .white
     
     /// Font for titles.
-    public var titleFont: UIFont = .systemFontOfSize(14)
+    open var titleFont: UIFont = .systemFont(ofSize: 14)
     
-    private let stackView = UIStackView()
-    private var buttons: [UIButton] = []
-    private var labels: [UILabel] = []
-    private(set) lazy var highlighterView: UIView = {
+    fileprivate let stackView = UIStackView()
+    fileprivate var buttons: [UIButton] = []
+    fileprivate var labels: [UILabel] = []
+    fileprivate(set) lazy var highlighterView: UIView = {
         let frame = CGRect(origin: CGPoint.zero, size: CGSize(width: 0, height: self.bounds.height))
         let highlighterView = UIView(frame: frame)
         highlighterView.layer.cornerRadius = self.bounds.height / 2
         self.addSubview(highlighterView)
-        self.sendSubviewToBack(highlighterView)
+        self.sendSubview(toBack: highlighterView)
         
         return highlighterView
     }()
@@ -58,28 +58,28 @@ public class ColorTabs: UIControl {
         commonInit()
     }
     
-    override public var frame: CGRect {
+    override open var frame: CGRect {
         didSet {
             stackView.frame = bounds
         }
     }
     
-    override public var bounds: CGRect {
+    override open var bounds: CGRect {
         didSet {
             stackView.frame = bounds
         }
     }
 
-    public var selectedSegmentIndex: Int = 0 {
+    open var selectedSegmentIndex: Int = 0 {
         didSet {
             if oldValue != selectedSegmentIndex {
                 transition(from: oldValue, to: selectedSegmentIndex)
-                sendActionsForControlEvents(.ValueChanged)
+                sendActions(for: .valueChanged)
             }
         }
     }
     
-    public override func didMoveToWindow() {
+    open override func didMoveToWindow() {
         super.didMoveToWindow()
         
         if window != nil {
@@ -91,23 +91,23 @@ public class ColorTabs: UIControl {
         }
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         moveHighlighterView(toItemAt: selectedSegmentIndex)
     }
     
-    public func centerOfItem(atIndex index: Int) -> CGPoint {
+    open func centerOfItem(atIndex index: Int) -> CGPoint {
         return buttons[index].center
     }
     
-    public func setIconsHidden(hidden: Bool) {
+    open func setIconsHidden(_ hidden: Bool) {
         buttons.forEach {
             $0.alpha = hidden ? 0 : 1
         }
     }
     
-    public func setHighlighterHidden(hidden: Bool) {
+    open func setHighlighterHidden(_ hidden: Bool) {
         let sourceHeight = hidden ? bounds.height : 0
         let targetHeight = hidden ? 0 : bounds.height
         
@@ -117,20 +117,20 @@ public class ColorTabs: UIControl {
             $0.duration = HighlighterAnimationDuration
             return $0
         }(CABasicAnimation(keyPath: "cornerRadius"))
-        highlighterView.layer.addAnimation(animation, forKey: nil)
+        highlighterView.layer.add(animation, forKey: nil)
         highlighterView.layer.cornerRadius = targetHeight / 2
         
-        UIView.animateWithDuration(HighlighterAnimationDuration) {
+        UIView.animate(withDuration: HighlighterAnimationDuration, animations: {
             self.highlighterView.frame.size.height = targetHeight
             self.highlighterView.alpha = hidden ? 0 : 1
             
             for label in self.labels  {
                 label.alpha = hidden ? 0 : 1
             }
-        }
+        }) 
     }
     
-    public func reloadData() {
+    open func reloadData() {
         guard let dataSource = dataSource else {
             return
         }
@@ -154,17 +154,17 @@ public class ColorTabs: UIControl {
 /// Setup
 private extension ColorTabs {
     
-    private func commonInit() {
+    func commonInit() {
         addSubview(stackView)
-        stackView.distribution = .FillEqually
+        stackView.distribution = .fillEqually
     }
     
     func createButton(forIndex index: Int, withDataSource dataSource: ColorTabsDataSource) -> UIButton {
         let button = UIButton()
         
-        button.setImage(dataSource.tabSwitcher(self, iconAt: index), forState: .Normal)
-        button.setImage(dataSource.tabSwitcher(self, hightlightedIconAt: index), forState: .Selected)
-        button.addTarget(self, action: #selector(selectButton(_:)), forControlEvents: .TouchUpInside)
+        button.setImage(dataSource.tabSwitcher(self, iconAt: index), for: UIControlState())
+        button.setImage(dataSource.tabSwitcher(self, hightlightedIconAt: index), for: .selected)
+        button.addTarget(self, action: #selector(selectButton(_:)), for: .touchUpInside)
         
         return button
     }
@@ -172,8 +172,8 @@ private extension ColorTabs {
     func createLabel(forIndex index: Int, withDataSource dataSource: ColorTabsDataSource) -> UILabel {
         let label = UILabel()
         
-        label.hidden = true
-        label.textAlignment = .Left
+        label.isHidden = true
+        label.textAlignment = .left
         label.text = dataSource.tabSwitcher(self, titleAt: index)
         label.textColor = titleTextColor
         label.adjustsFontSizeToFitWidth = true
@@ -186,36 +186,36 @@ private extension ColorTabs {
 
 private extension ColorTabs {
 
-    @objc func selectButton(sender: UIButton) {
-        if let index = buttons.indexOf(sender) {
+    @objc func selectButton(_ sender: UIButton) {
+        if let index = buttons.index(of: sender) {
             selectedSegmentIndex = index
         }
     }
     
     func transition(from fromIndex: Int, to toIndex: Int) {
         guard let fromLabel = labels[safe: fromIndex],
-            fromIcon = buttons[safe: fromIndex],
-            toLabel = labels[safe: toIndex],
-            toIcon = buttons[safe: toIndex] else {
+            let fromIcon = buttons[safe: fromIndex],
+            let toLabel = labels[safe: toIndex],
+            let toIcon = buttons[safe: toIndex] else {
                 return
         }
         
         let animation = {
-            fromLabel.hidden = true
+            fromLabel.isHidden = true
             fromLabel.alpha = 0
-            fromIcon.selected = false
+            fromIcon.isSelected = false
             
-            toLabel.hidden = false
+            toLabel.isHidden = false
             toLabel.alpha = 1
-            toIcon.selected = true
+            toIcon.isSelected = true
             
             self.stackView.layoutIfNeeded()
             self.layoutIfNeeded()
             self.moveHighlighterView(toItemAt: toIndex)
         }
         
-        UIView.animateWithDuration(
-            SwitchAnimationDuration,
+        UIView.animate(
+            withDuration: SwitchAnimationDuration,
             delay: 0,
             usingSpringWithDamping: 0.7,
             initialSpringVelocity: 3,
@@ -226,7 +226,7 @@ private extension ColorTabs {
     }
     
     func moveHighlighterView(toItemAt toIndex: Int) {
-        guard let countItems = dataSource?.numberOfItems(inTabSwitcher: self) where countItems > toIndex else {
+        guard let countItems = dataSource?.numberOfItems(inTabSwitcher: self) , countItems > toIndex else {
             return
         }
         
@@ -234,7 +234,7 @@ private extension ColorTabs {
         let toIcon = buttons[toIndex]
         
         // offset for first item
-        let point = convertPoint(toIcon.frame.origin, toView: self)
+        let point = convert(toIcon.frame.origin, to: self)
         let offsetForFirstItem: CGFloat = toIndex == 0 ? -HighlighterViewOffScreenOffset : 0
         highlighterView.frame.origin.x = point.x + offsetForFirstItem
         

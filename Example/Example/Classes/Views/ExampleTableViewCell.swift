@@ -10,9 +10,9 @@ import UIKit
 
 class ExampleTableViewCell: UITableViewCell {
     
-    @IBOutlet private weak var contentImageView: UIImageView!
+    @IBOutlet fileprivate weak var contentImageView: UIImageView!
 
-    func apply(image: UIImage) {
+    func apply(_ image: UIImage) {
         contentImageView.image = image
     }
     

@@ -17,16 +17,16 @@ class ExamplePopoverViewController: PopoverViewController {
         setupContentView()
     }
     
-    private func setupContentView() {
+    fileprivate func setupContentView() {
         let imageView = UIImageView(image: UIImage(named: "popover_placeholder"))
-        imageView.contentMode = .ScaleAspectFit
+        imageView.contentMode = .scaleAspectFit
         contentView.addSubview(imageView)
         
         let padding: CGFloat = 20
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.leadingAnchor.constraintEqualToAnchor(contentView.leadingAnchor, constant: padding).active = true
-        imageView.trailingAnchor.constraintEqualToAnchor(contentView.trailingAnchor, constant: -padding).active = true
-        imageView.centerXAnchor.constraintEqualToAnchor(contentView.centerXAnchor).active = true
-        imageView.centerYAnchor.constraintEqualToAnchor(contentView.centerYAnchor).active = true
+        imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
 }
