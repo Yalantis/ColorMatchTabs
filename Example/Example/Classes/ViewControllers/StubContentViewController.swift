@@ -10,12 +10,12 @@ import UIKit
 
 class StubContentViewController: UITableViewController {
     
-    enum Type {
-        case Products, Venues, Reviews, Users
+    enum `Type` {
+        case products, venues, reviews, users
     }
     
     var type: Type!
-    private var objects: [UIImage] = []
+    fileprivate var objects: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,34 +24,34 @@ class StubContentViewController: UITableViewController {
         setupDataSource()
     }
     
-    private func setupTableView() {
-        tableView.backgroundColor = UIColor.clearColor()
+    fileprivate func setupTableView() {
+        tableView.backgroundColor = UIColor.clear
         tableView.allowsSelection = false
-        tableView.separatorColor = UIColor.clearColor()
-        tableView.registerNib(UINib(nibName: "ExampleTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        tableView.separatorColor = UIColor.clear
+        tableView.register(UINib(nibName: "ExampleTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
     
-    private func setupDataSource() {
-        if type == .Products || type == .Reviews {
+    fileprivate func setupDataSource() {
+        if type == .products || type == .reviews {
             self.objects = [UIImage(named: "product_card1")!, UIImage(named: "product_card2")!]
-        } else if type == .Venues || type == .Users {
+        } else if type == .venues || type == .users {
             self.objects = [UIImage(named: "venue_card1")!, UIImage(named: "venue_card2")!]
         }
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return objects.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! ExampleTableViewCell
-        let image = objects[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ExampleTableViewCell
+        let image = objects[(indexPath as NSIndexPath).row]
         cell.apply(image)
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableView.bounds.width / 1.4
     }
     

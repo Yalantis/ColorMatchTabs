@@ -10,51 +10,51 @@ import UIKit
 
 @objc public protocol CircleMenuDelegate: class {
     
-    optional func circleMenuWillDisplayItems(circleMenu: CircleMenu)
-    optional func circleMenuWillHideItems(circleMenu: CircleMenu)
+    @objc optional func circleMenuWillDisplayItems(_ circleMenu: CircleMenu)
+    @objc optional func circleMenuWillHideItems(_ circleMenu: CircleMenu)
     
-    optional func circleMenu(circleMenu: CircleMenu, didSelectItemAt index: Int)
+    @objc optional func circleMenu(_ circleMenu: CircleMenu, didSelectItemAt index: Int)
     
 }
 
 public protocol CircleMenuDataSource: class {
     
     func numberOfItems(inMenu circleMenu: CircleMenu) -> Int
-    func circleMenu(circleMenu: CircleMenu, tintColorAt index: Int) -> UIColor
+    func circleMenu(_ circleMenu: CircleMenu, tintColorAt index: Int) -> UIColor
     
 }
 
 /// A menu with items spreaded by a circle around the button.
-public class CircleMenu: UIControl {
+open class CircleMenu: UIControl {
     
     /// Delegate.
-    @IBInspectable public weak var delegate: CircleMenuDelegate?
+    @IBInspectable open weak var delegate: CircleMenuDelegate?
     
     /// Delegate.
-    @IBInspectable public weak var dataSource: CircleMenuDataSource?
+    @IBInspectable open weak var dataSource: CircleMenuDataSource?
     
     /// Animation delay.
-    @IBInspectable public var animationDelay: NSTimeInterval = 0
+    @IBInspectable open var animationDelay: TimeInterval = 0
     
     /// Animation duration.
-    @IBInspectable public var animationDuration: NSTimeInterval = 0.5
+    @IBInspectable open var animationDuration: TimeInterval = 0.5
     
     // Radius of spreading the elements.
-    @IBInspectable public var itemsSpacing: CGFloat = 130
+    @IBInspectable open var itemsSpacing: CGFloat = 130
     
     /// Item dimension.
-    @IBInspectable public var itemDimension: CGFloat = 50
+    @IBInspectable open var itemDimension: CGFloat = 50
     
     /// Image for a button to open/close menu.
-    @IBInspectable public var image: UIImage? {
+    @IBInspectable open var image: UIImage? {
         didSet {
             imageView.image = image
         }
     }
 
-    private var visible = false
-    private var buttons: [UIButton] = []
-    private var imageView: UIImageView = UIImageView()
+    fileprivate var visible = false
+    fileprivate var buttons: [UIButton] = []
+    fileprivate var imageView: UIImageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,19 +68,19 @@ public class CircleMenu: UIControl {
         commonInit()
     }
     
-    override public var frame: CGRect {
+    override open var frame: CGRect {
         didSet {
             imageView.frame = bounds
         }
     }
     
-    override public var bounds: CGRect {
+    override open var bounds: CGRect {
         didSet {
             imageView.frame = bounds
         }
     }
     
-    override public func didMoveToSuperview() {
+    override open func didMoveToSuperview() {
         super.didMoveToSuperview()
         
         buttons.forEach { superview?.addSubview($0) }
@@ -100,7 +100,7 @@ public extension CircleMenu {
         for index in 0..<dataSource.numberOfItems(inMenu: self) {
             let button = UIButton(frame: CGRect.zero)
             
-            button.addTarget(self, action: #selector(selectItem(_:)), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(selectItem(_:)), for: .touchUpInside)
             button.tag = index
             button.layoutIfNeeded()
             button.backgroundColor = dataSource.circleMenu(self, tintColorAt: index)
@@ -127,12 +127,12 @@ public extension CircleMenu {
         let x = itemsSpacing * cos(angle) + bounds.size.width / 2
         let y = itemsSpacing * sin(angle) + bounds.size.height / 2
         let point = CGPoint(x: x, y: y)
-        let convertedPoint = convertPoint(point, toView: superview)
+        let convertedPoint = convert(point, to: superview)
         
         return convertedPoint
     }
     
-    func selectItem(atIndex atIndex: Int) {
+    func selectItem(atIndex: Int) {
         let count = dataSource?.numberOfItems(inMenu: self) ?? 0
         guard atIndex < count else {
             return
@@ -144,7 +144,7 @@ public extension CircleMenu {
         }
     }
     
-    @objc func triggerMenu(sender: AnyObject? = nil) {
+    @objc func triggerMenu(_ sender: AnyObject? = nil) {
         assert(superview != nil, "You must add the menu to superview before perfoming any actions with it")
         
         visible = !visible
@@ -156,7 +156,7 @@ public extension CircleMenu {
         setCloseButtonHidden(!visible)
     }
     
-    @objc func selectItem(sender: UIButton) {
+    @objc func selectItem(_ sender: UIButton) {
         hideItems()
         delegate?.circleMenu?(self, didSelectItemAt: sender.tag)
     }
@@ -167,7 +167,7 @@ private extension CircleMenu {
     
     func commonInit() {
         addSubview(imageView)
-        addTarget(self, action: #selector(triggerMenu), forControlEvents: .TouchUpInside)
+        addTarget(self, action: #selector(triggerMenu), for: .touchUpInside)
     }
         
     func removeOldButtons() {
@@ -195,14 +195,14 @@ extension CircleMenu {
         visible = true
         delegate?.circleMenuWillDisplayItems?(self)
         
-        for (index, button) in buttons.enumerate() {
+        for (index, button) in buttons.enumerated() {
             button.frame = sourceFrame
             performAnimated ({
-                button.hidden = false
+                button.isHidden = false
                 button.frame = self.targetFrameForItem(at: index)
             })
         }
-        superview.bringSubviewToFront(self)
+        superview.bringSubview(toFront: self)
     }
     
     func hideItems() {
@@ -214,21 +214,21 @@ extension CircleMenu {
         performAnimated({
             for button in self.buttons {
                 button.frame = self.sourceFrame
-                button.hidden = true
+                button.isHidden = true
             }
         })
         visible = false
     }
     
-    func setCloseButtonHidden(hidden: Bool) {
+    func setCloseButtonHidden(_ hidden: Bool) {
         performAnimated({
-            self.transform = hidden ? CGAffineTransformIdentity : CGAffineTransformMakeRotation(CGFloat(M_PI) * 0.75)
+            self.transform = hidden ? CGAffineTransform.identity : CGAffineTransform(rotationAngle: CGFloat(M_PI) * 0.75)
         })
     }
     
-    func performAnimated(block: () -> Void, completion: (Bool -> Void)? = nil) {
-        UIView.animateWithDuration(
-            animationDuration,
+    func performAnimated(_ block: @escaping () -> Void, completion: ((Bool) -> Void)? = nil) {
+        UIView.animate(
+            withDuration: animationDuration,
             delay: animationDelay,
             usingSpringWithDamping: 0.7,
             initialSpringVelocity: 3,

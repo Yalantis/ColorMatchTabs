@@ -9,5 +9,5 @@
 import Foundation
 
 let PlusButtonButtonOffset: CGFloat = -20
-let AnimationDuration: NSTimeInterval = 0.3
-let PopupAnimationDuration: NSTimeInterval = 0.2
+let AnimationDuration: TimeInterval = 0.3
+let PopupAnimationDuration: TimeInterval = 0.2

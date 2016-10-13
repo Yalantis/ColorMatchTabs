@@ -14,7 +14,7 @@ class MenuView: UIView {
     internal(set) var tabs: ColorTabs!
     internal(set) var scrollMenu: ScrollMenu!
     internal(set) var circleMenuButton: UIButton!
-    private var shadowView: VerticalGradientView!
+    fileprivate var shadowView: VerticalGradientView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,15 +28,15 @@ class MenuView: UIView {
         commonInit()
     }
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
-        super.willMoveToSuperview(newSuperview)
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         
         layoutIfNeeded()
     }
     
-    func setCircleMenuButtonHidden(hidden: Bool) {
-        circleMenuButton.hidden = hidden
-        shadowView.hidden = hidden
+    func setCircleMenuButtonHidden(_ hidden: Bool) {
+        circleMenuButton.isHidden = hidden
+        shadowView.isHidden = hidden
     }
     
 }
@@ -45,7 +45,7 @@ class MenuView: UIView {
 private extension MenuView {
     
     func commonInit() {
-        backgroundColor = .whiteColor()
+        backgroundColor = .white
         createSubviews()
         
         layoutNavigationBar()
@@ -61,22 +61,22 @@ private extension MenuView {
         addSubview(scrollMenu)
         
         navigationBar = ExtendedNavigationBar()
-        navigationBar.backgroundColor = .whiteColor()
+        navigationBar.backgroundColor = .white
         addSubview(navigationBar)
         
         tabs = ColorTabs()
-        tabs.userInteractionEnabled = true
+        tabs.isUserInteractionEnabled = true
         navigationBar.addSubview(tabs)
         
         shadowView = VerticalGradientView()
-        shadowView.hidden = true
+        shadowView.isHidden = true
         shadowView.topColor = UIColor(white: 1, alpha: 0)
         shadowView.bottomColor = UIColor(white: 1, alpha: 1)
         addSubview(shadowView)
         
         circleMenuButton = UIButton()
-        circleMenuButton.hidden = true
-        circleMenuButton.setImage(UIImage(namedInCurrentBundle: "circle_menu"), forState: .Normal)
+        circleMenuButton.isHidden = true
+        circleMenuButton.setImage(UIImage(namedInCurrentBundle: "circle_menu"), for: UIControlState())
         circleMenuButton.adjustsImageWhenHighlighted = false
         addSubview(circleMenuButton)
     }
@@ -88,40 +88,40 @@ private extension MenuView {
     
     func layoutNavigationBar() {
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
-        navigationBar.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-        navigationBar.topAnchor.constraintEqualToAnchor(topAnchor).active = true
-        navigationBar.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
-        navigationBar.heightAnchor.constraintEqualToConstant(50).active = true
+        navigationBar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        navigationBar.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        navigationBar.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        navigationBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     func layoutTabs() {
         tabs.translatesAutoresizingMaskIntoConstraints = false
-        tabs.leadingAnchor.constraintEqualToAnchor(navigationBar.leadingAnchor).active = true
-        tabs.topAnchor.constraintEqualToAnchor(navigationBar.topAnchor).active = true
-        tabs.trailingAnchor.constraintEqualToAnchor(navigationBar.trailingAnchor).active = true
-        tabs.heightAnchor.constraintEqualToConstant(44).active = true
+        tabs.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor).isActive = true
+        tabs.topAnchor.constraint(equalTo: navigationBar.topAnchor).isActive = true
+        tabs.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor).isActive = true
+        tabs.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
     
     func layoutScrollMenu() {
         scrollMenu.translatesAutoresizingMaskIntoConstraints = false
-        scrollMenu.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-        scrollMenu.topAnchor.constraintEqualToAnchor(navigationBar.bottomAnchor).active = true
-        scrollMenu.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
-        scrollMenu.bottomAnchor.constraintEqualToAnchor(bottomAnchor).active = true
+        scrollMenu.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        scrollMenu.topAnchor.constraint(equalTo: navigationBar.bottomAnchor).isActive = true
+        scrollMenu.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        scrollMenu.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
     func layoutShadowView() {
         shadowView.translatesAutoresizingMaskIntoConstraints = false
-        shadowView.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-        shadowView.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
-        shadowView.bottomAnchor.constraintEqualToAnchor(bottomAnchor).active = true
-        shadowView.heightAnchor.constraintEqualToConstant(80).active = true
+        shadowView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        shadowView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        shadowView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        shadowView.heightAnchor.constraint(equalToConstant: 80).isActive = true
     }
     
     func layoutCircleMenu() {
         circleMenuButton.translatesAutoresizingMaskIntoConstraints = false
-        circleMenuButton.bottomAnchor.constraintEqualToAnchor(bottomAnchor, constant: PlusButtonButtonOffset).active = true
-        circleMenuButton.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
+        circleMenuButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: PlusButtonButtonOffset).isActive = true
+        circleMenuButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     
 }

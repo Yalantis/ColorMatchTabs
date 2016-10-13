@@ -13,16 +13,16 @@ class StubContentViewControllersProvider {
     
     static let viewControllers: [UIViewController] = {
         let productsViewController = StubContentViewController()
-        productsViewController.type = .Products
+        productsViewController.type = .products
         
         let venuesViewController = StubContentViewController()
-        venuesViewController.type = .Venues
+        venuesViewController.type = .venues
         
         let reviewsViewController = StubContentViewController()
-        reviewsViewController.type = .Reviews
+        reviewsViewController.type = .reviews
         
         let usersViewController = StubContentViewController()
-        usersViewController.type = .Users
+        usersViewController.type = .users
         
         return [productsViewController, venuesViewController, reviewsViewController, usersViewController]
     }()
