@@ -53,6 +53,10 @@ open class ColorMatchTabsViewController: UITabBarController {
         }
     }
     
+    open var selectedSegmentIndex: Int {
+        return _view.tabs.selectedSegmentIndex
+    }
+    
     fileprivate var icons: [UIImageView] = []
     fileprivate let circleTransition = CircleTransition()
     
