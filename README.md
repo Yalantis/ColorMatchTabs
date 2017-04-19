@@ -18,7 +18,7 @@ Also, read how it was done in [our blog](https://yalantis.com/blog/how-we-develo
 
 ## Installation
 
-####[CocoaPods](https://cocoapods.org/)
+#### [CocoaPods](https://cocoapods.org/)
 
 ```ruby
 pod 'ColorMatchTabs', '~> 2.0'
