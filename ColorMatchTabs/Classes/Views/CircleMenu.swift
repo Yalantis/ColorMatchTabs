@@ -121,8 +121,8 @@ public extension CircleMenu {
         assert(index >= 0)
         assert(index < count)
         
-        let deltaAngle = CGFloat(M_PI / Double(Double(count)))
-        let angle = deltaAngle * CGFloat(Double(index) + 0.5) - CGFloat(M_PI)
+        let deltaAngle = CGFloat(Double.pi / Double(Double(count)))
+        let angle = deltaAngle * CGFloat(Double(index) + 0.5) - CGFloat(Double.pi)
         
         let x = itemsSpacing * cos(angle) + bounds.size.width / 2
         let y = itemsSpacing * sin(angle) + bounds.size.height / 2
@@ -222,7 +222,7 @@ extension CircleMenu {
     
     func setCloseButtonHidden(_ hidden: Bool) {
         performAnimated({
-            self.transform = hidden ? CGAffineTransform.identity : CGAffineTransform(rotationAngle: CGFloat(M_PI) * 0.75)
+            self.transform = hidden ? CGAffineTransform.identity : CGAffineTransform(rotationAngle: CGFloat(Double.pi) * 0.75)
         })
     }
     
