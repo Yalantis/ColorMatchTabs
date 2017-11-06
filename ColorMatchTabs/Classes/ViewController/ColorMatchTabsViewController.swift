@@ -23,13 +23,13 @@ public protocol ColorMatchTabsViewControllerDataSource: class {
 
 public protocol ColorMatchTabsViewControllerDelegate: class {
     
-    func didSelectControllerAt(_ index: Int)
+    func didSelectItemAt(_ index: Int)
 
 }
 
 extension ColorMatchTabsViewControllerDelegate {
     
-    func didSelectControllerAt(_ index: Int) {}
+    func didSelectItemAt(_ index: Int) {}
     
 }
 
@@ -274,7 +274,7 @@ extension ColorMatchTabsViewController: ScrollMenuDelegate {
         if _view.tabs.selectedSegmentIndex != index {
             _view.tabs.selectedSegmentIndex = index
         }
-        colorMatchTabDelegate?.didSelectControllerAt(index)
+        colorMatchTabDelegate?.didSelectItemAt(index)
     }
     
 }
