@@ -19,7 +19,7 @@ class ExampleViewContoller: ColorMatchTabsViewController {
         popoverViewController = ExamplePopoverViewController()
         popoverViewController?.delegate = self
         
-        dataSource = self
+        colorMatchTabDataSource = self
         reloadData()
     }
 
