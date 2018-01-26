@@ -21,14 +21,28 @@ public protocol ColorMatchTabsViewControllerDataSource: class {
 
 }
 
+public protocol ColorMatchTabsViewControllerDelegate: class {
+    
+    func didSelectItemAt(_ index: Int)
+
+}
+
+extension ColorMatchTabsViewControllerDelegate {
+    
+    func didSelectItemAt(_ index: Int) {}
+    
+}
+
 open class ColorMatchTabsViewController: UITabBarController {
     
-    @IBInspectable open weak var dataSource: ColorMatchTabsViewControllerDataSource? {
+    @IBInspectable open weak var colorMatchTabDataSource: ColorMatchTabsViewControllerDataSource? {
         didSet {
-            _view.scrollMenu.dataSource = dataSource == nil ? nil : self
-            _view.tabs.dataSource = dataSource == nil ? nil : self
+            _view.scrollMenu.dataSource = colorMatchTabDataSource == nil ? nil : self
+            _view.tabs.dataSource = colorMatchTabDataSource == nil ? nil : self
         }
     }
+    
+    @IBInspectable open weak var colorMatchTabDelegate: ColorMatchTabsViewControllerDelegate?
     
     @IBInspectable open var scrollEnabled = true {
         didSet {
@@ -108,7 +122,7 @@ open class ColorMatchTabsViewController: UITabBarController {
 private extension ColorMatchTabsViewController {
     
     func setupIcons() {
-        guard let dataSource = dataSource else {
+        guard let dataSource = colorMatchTabDataSource else {
             return
         }
         
@@ -154,7 +168,7 @@ private extension ColorMatchTabsViewController {
     }
     
     func updateNavigationBar(forSelectedIndex index: Int) {
-        let color = dataSource?.tabsViewController(self, tintColorAt: index) ?? .white
+        let color = colorMatchTabDataSource?.tabsViewController(self, tintColorAt: index) ?? .white
         
         titleLabel.textColor = color
         _view.scrollMenu.backgroundColor = color.withAlphaComponent(0.2)
@@ -184,9 +198,9 @@ private extension ColorMatchTabsViewController {
                     
                     let image: UIImage?
                     if index == self._view.tabs.selectedSegmentIndex {
-                        image = self.dataSource?.tabsViewController(self, hightlightedIconAt: index)
+                        image = self.colorMatchTabDataSource?.tabsViewController(self, hightlightedIconAt: index)
                     } else {
-                        image = self.dataSource?.tabsViewController(self, iconAt: index)
+                        image = self.colorMatchTabDataSource?.tabsViewController(self, iconAt: index)
                     }
                     iconImageView.image = image
                 },
@@ -219,7 +233,7 @@ private extension ColorMatchTabsViewController {
                 initialSpringVelocity: 3,
                 options: [],
                 animations: {
-                    iconImageView.image = self.dataSource?.tabsViewController(self, hightlightedIconAt: index)
+                    iconImageView.image = self.colorMatchTabDataSource?.tabsViewController(self, hightlightedIconAt: index)
                     iconImageView.center = CGPoint(
                         x: iconImageView.center.x,
                         y: iconImageView.center.y + self.view.frame.height / 2
@@ -260,6 +274,7 @@ extension ColorMatchTabsViewController: ScrollMenuDelegate {
         if _view.tabs.selectedSegmentIndex != index {
             _view.tabs.selectedSegmentIndex = index
         }
+        colorMatchTabDelegate?.didSelectItemAt(index)
     }
     
 }
@@ -291,23 +306,23 @@ extension ColorMatchTabsViewController: UIViewControllerTransitioningDelegate {
 extension ColorMatchTabsViewController: ColorTabsDataSource {
     
     open func numberOfItems(inTabSwitcher tabSwitcher: ColorTabs) -> Int {
-        return dataSource?.numberOfItems(inController: self) ?? 0
+        return colorMatchTabDataSource?.numberOfItems(inController: self) ?? 0
     }
     
     open func tabSwitcher(_ tabSwitcher: ColorTabs, titleAt index: Int) -> String {
-        return dataSource!.tabsViewController(self, titleAt: index)
+        return colorMatchTabDataSource!.tabsViewController(self, titleAt: index)
     }
     
     open func tabSwitcher(_ tabSwitcher: ColorTabs, iconAt index: Int) -> UIImage {
-        return dataSource!.tabsViewController(self, iconAt: index)
+        return colorMatchTabDataSource!.tabsViewController(self, iconAt: index)
     }
     
     open func tabSwitcher(_ tabSwitcher: ColorTabs, hightlightedIconAt index: Int) -> UIImage {
-        return dataSource!.tabsViewController(self, hightlightedIconAt: index)
+        return colorMatchTabDataSource!.tabsViewController(self, hightlightedIconAt: index)
     }
     
     open func tabSwitcher(_ tabSwitcher: ColorTabs, tintColorAt index: Int) -> UIColor {
-        return dataSource!.tabsViewController(self, tintColorAt: index)
+        return colorMatchTabDataSource!.tabsViewController(self, tintColorAt: index)
     }
     
 }
@@ -315,11 +330,11 @@ extension ColorMatchTabsViewController: ColorTabsDataSource {
 extension ColorMatchTabsViewController: ScrollMenuDataSource {
     
     open func numberOfItemsInScrollMenu(_ scrollMenu: ScrollMenu) -> Int {
-        return dataSource?.numberOfItems(inController: self) ?? 0
+        return colorMatchTabDataSource?.numberOfItems(inController: self) ?? 0
     }
     
     open func scrollMenu(_ scrollMenu: ScrollMenu, viewControllerAtIndex index: Int) -> UIViewController {
-        return dataSource!.tabsViewController(self, viewControllerAt: index)
+        return colorMatchTabDataSource!.tabsViewController(self, viewControllerAt: index)
     }
     
 }
@@ -327,11 +342,11 @@ extension ColorMatchTabsViewController: ScrollMenuDataSource {
 extension ColorMatchTabsViewController: CircleMenuDataSource {
     
     open func numberOfItems(inMenu circleMenu: CircleMenu) -> Int {
-        return dataSource?.numberOfItems(inController: self) ?? 0
+        return colorMatchTabDataSource?.numberOfItems(inController: self) ?? 0
     }
     
     open func circleMenu(_ circleMenu: CircleMenu, tintColorAt index: Int) -> UIColor {
-        return dataSource!.tabsViewController(self, tintColorAt: index)
+        return colorMatchTabDataSource!.tabsViewController(self, tintColorAt: index)
     }
     
 }
@@ -339,15 +354,15 @@ extension ColorMatchTabsViewController: CircleMenuDataSource {
 extension ColorMatchTabsViewController: PopoverViewControllerDataSource {
     
     open func numberOfItems(inPopoverViewController popoverViewController: PopoverViewController) -> Int {
-        return dataSource?.numberOfItems(inController: self) ?? 0
+        return colorMatchTabDataSource?.numberOfItems(inController: self) ?? 0
     }
     
     open func popoverViewController(_ popoverViewController: PopoverViewController, iconAt index: Int) -> UIImage {
-        return dataSource!.tabsViewController(self, iconAt: index)
+        return colorMatchTabDataSource!.tabsViewController(self, iconAt: index)
     }
     
     open func popoverViewController(_ popoverViewController: PopoverViewController, hightlightedIconAt index: Int) -> UIImage {
-        return dataSource!.tabsViewController(self, hightlightedIconAt: index)
+        return colorMatchTabDataSource!.tabsViewController(self, hightlightedIconAt: index)
     }
     
 }
