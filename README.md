@@ -21,14 +21,14 @@ Also, read how it was done in [our blog](https://yalantis.com/blog/how-we-develo
 #### [CocoaPods](https://cocoapods.org/)
 
 ```ruby
-pod 'ColorMatchTabs', '~> 2.0'
+pod 'ColorMatchTabs', '~> 2.0.2'
 ```
 
 #### [Carthage](https://github.com/Carthage/Carthage)
 
 
 ```
-github "Yalantis/ColorMatchTabs" ~> 2.0
+github "Yalantis/ColorMatchTabs" ~> 2.0.2
 ```
 
 ## How to use
