@@ -17,7 +17,7 @@ class ExamplePopoverViewController: PopoverViewController {
         setupContentView()
     }
     
-    fileprivate func setupContentView() {
+    private func setupContentView() {
         let imageView = UIImageView(image: UIImage(named: "popover_placeholder"))
         imageView.contentMode = .scaleAspectFit
         contentView.addSubview(imageView)

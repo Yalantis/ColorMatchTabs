@@ -1,6 +1,6 @@
 # ColorMatchTabs
 
-![Swift 2.3.x](https://img.shields.io/badge/Swift-2.3.x-orange.svg)
+![Swift 4](https://img.shields.io/badge/Swift-4.x-orange.svg)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/ColorMatchTabs.svg)](https://img.shields.io/cocoapods/v/GuillotineMenu.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
@@ -21,14 +21,14 @@ Also, read how it was done in [our blog](https://yalantis.com/blog/how-we-develo
 #### [CocoaPods](https://cocoapods.org/)
 
 ```ruby
-pod 'ColorMatchTabs', '~> 2.0.2'
+pod 'ColorMatchTabs', '~> 3.0'
 ```
 
 #### [Carthage](https://github.com/Carthage/Carthage)
 
 
 ```
-github "Yalantis/ColorMatchTabs" ~> 2.0.2
+github "Yalantis/ColorMatchTabs" ~> 3.0
 ```
 
 ## How to use
@@ -83,7 +83,7 @@ P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on
 
 The MIT License (MIT)
 
-Copyright (c) 2017 Yalantis
+Copyright (c) 2018 Yalantis
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

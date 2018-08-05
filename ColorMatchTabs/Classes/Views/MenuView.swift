@@ -14,7 +14,7 @@ class MenuView: UIView {
     internal(set) var tabs: ColorTabs!
     internal(set) var scrollMenu: ScrollMenu!
     internal(set) var circleMenuButton: UIButton!
-    fileprivate var shadowView: VerticalGradientView!
+    internal var shadowView: VerticalGradientView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)

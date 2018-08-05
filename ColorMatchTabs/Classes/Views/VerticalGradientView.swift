@@ -8,7 +8,8 @@
 
 import UIKit
 
-@IBDesignable class VerticalGradientView: UIView {
+@IBDesignable
+class VerticalGradientView: UIView {
     
     @IBInspectable var topColor: UIColor = .white {
         didSet {

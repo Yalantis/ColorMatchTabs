@@ -10,10 +10,13 @@ import UIKit
 
 @objc public protocol CircleMenuDelegate: class {
     
-    @objc optional func circleMenuWillDisplayItems(_ circleMenu: CircleMenu)
-    @objc optional func circleMenuWillHideItems(_ circleMenu: CircleMenu)
+    @objc
+    optional func circleMenuWillDisplayItems(_ circleMenu: CircleMenu)
+    @objc
+    optional func circleMenuWillHideItems(_ circleMenu: CircleMenu)
     
-    @objc optional func circleMenu(_ circleMenu: CircleMenu, didSelectItemAt index: Int)
+    @objc
+    optional func circleMenu(_ circleMenu: CircleMenu, didSelectItemAt index: Int)
     
 }
 
@@ -28,16 +31,16 @@ public protocol CircleMenuDataSource: class {
 open class CircleMenu: UIControl {
     
     /// Delegate.
-    @IBInspectable open weak var delegate: CircleMenuDelegate?
+    open weak var delegate: CircleMenuDelegate?
     
     /// Delegate.
-    @IBInspectable open weak var dataSource: CircleMenuDataSource?
+    open weak var dataSource: CircleMenuDataSource?
     
     /// Animation delay.
-    @IBInspectable open var animationDelay: TimeInterval = 0
+    open var animationDelay: TimeInterval = 0
     
     /// Animation duration.
-    @IBInspectable open var animationDuration: TimeInterval = 0.5
+    open var animationDuration: TimeInterval = 0.5
     
     // Radius of spreading the elements.
     @IBInspectable open var itemsSpacing: CGFloat = 130
@@ -144,7 +147,8 @@ public extension CircleMenu {
         }
     }
     
-    @objc func triggerMenu(_ sender: AnyObject? = nil) {
+    @objc
+    func triggerMenu(_ sender: AnyObject? = nil) {
         assert(superview != nil, "You must add the menu to superview before perfoming any actions with it")
         
         visible = !visible
@@ -156,7 +160,8 @@ public extension CircleMenu {
         setCloseButtonHidden(!visible)
     }
     
-    @objc func selectItem(_ sender: UIButton) {
+    @objc
+    func selectItem(_ sender: UIButton) {
         hideItems()
         delegate?.circleMenu?(self, didSelectItemAt: sender.tag)
     }
@@ -197,7 +202,7 @@ extension CircleMenu {
         
         for (index, button) in buttons.enumerated() {
             button.frame = sourceFrame
-            performAnimated ({
+            performAnimated({
                 button.isHidden = false
                 button.frame = self.targetFrameForItem(at: index)
             })
