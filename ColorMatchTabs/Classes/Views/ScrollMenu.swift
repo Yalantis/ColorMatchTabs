@@ -10,7 +10,8 @@ import UIKit
 
 @objc public protocol ScrollMenuDelegate: UIScrollViewDelegate {
     
-    @objc optional func scrollMenu(_ scrollMenu: ScrollMenu, didSelectedItemAt index: Int)
+    @objc
+    optional func scrollMenu(_ scrollMenu: ScrollMenu, didSelectedItemAt index: Int)
     
 }
 
@@ -27,7 +28,7 @@ open class ScrollMenu: UIScrollView {
     @IBOutlet open weak var dataSource: ScrollMenuDataSource?
     
     open var destinationIndex = 0
-
+    
     fileprivate var indexOfVisibleItem: Int {
         if bounds.width > 0 {
             return min(Int(round(contentOffset.x / bounds.width)), viewControllers.count - 1)
@@ -99,7 +100,7 @@ open class ScrollMenu: UIScrollView {
         hideContent(forRange: first..<last)
         updateContentOffset(withIndex: index, animated: true)
     }
- 
+    
     open func reloadData() {
         guard let dataSource = dataSource else {
             return
@@ -114,7 +115,6 @@ open class ScrollMenu: UIScrollView {
         
         layoutContent()
     }
-    
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -134,7 +134,7 @@ private extension ScrollMenu {
                 x: bounds.width * CGFloat(index),
                 y: 0,
                 width: bounds.width,
-                height: bounds.height 
+                height: bounds.height
             )
         }
     }
@@ -152,9 +152,9 @@ private extension ScrollMenu {
             viewController.view.isHidden = range.contains(index)
         }
     }
-
+    
     func showAllContent() {
-         viewControllers.forEach { viewController in
+        viewControllers.forEach { viewController in
             viewController.view.isHidden = false
         }
     }

@@ -115,7 +115,8 @@ private extension PopoverViewController {
 // actions
 private extension PopoverViewController {
     
-    @objc func hidePopover(_ sender: AnyObject? = nil) {
+    @objc
+    func hidePopover(_ sender: AnyObject? = nil) {
         dismiss(animated: true, completion: nil)
     }
     

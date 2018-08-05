@@ -35,16 +35,16 @@ extension ColorMatchTabsViewControllerDelegate {
 
 open class ColorMatchTabsViewController: UITabBarController {
     
-    @IBInspectable open weak var colorMatchTabDataSource: ColorMatchTabsViewControllerDataSource? {
+    open weak var colorMatchTabDataSource: ColorMatchTabsViewControllerDataSource? {
         didSet {
             _view.scrollMenu.dataSource = colorMatchTabDataSource == nil ? nil : self
             _view.tabs.dataSource = colorMatchTabDataSource == nil ? nil : self
         }
     }
     
-    @IBInspectable open weak var colorMatchTabDelegate: ColorMatchTabsViewControllerDelegate?
+    open weak var colorMatchTabDelegate: ColorMatchTabsViewControllerDelegate?
     
-    @IBInspectable open var scrollEnabled = true {
+    open var scrollEnabled = true {
         didSet {
             updateScrollEnabled()
         }
@@ -213,15 +213,16 @@ private extension ColorMatchTabsViewController {
         }
     }
     
-    @objc func showPopover(_ sender: AnyObject?) {
+    @objc
+    func showPopover(_ sender: AnyObject?) {
         showDroppingItems()
         showPopover()
     }
     
     func showDroppingItems() {
-        UIView.animate(withDuration: AnimationDuration, animations: {
+        UIView.animate(withDuration: AnimationDuration) {
             self._view.tabs.setHighlighterHidden(true)
-        }) 
+        }
         
         for (index, iconImageView) in icons.enumerated() {
             iconImageView.center = _view.tabs.centerOfItem(atIndex: index)
@@ -259,7 +260,8 @@ private extension ColorMatchTabsViewController {
         present(popoverViewController, animated: true, completion: nil)
     }
     
-    @objc func changeContent(_ sender: ColorTabs) {
+    @objc
+    func changeContent(_ sender: ColorTabs) {
         updateNavigationBar(forSelectedIndex: sender.selectedSegmentIndex)
         if _view.scrollMenu.destinationIndex != sender.selectedSegmentIndex {
             _view.scrollMenu.selectItem(atIndex: sender.selectedSegmentIndex)

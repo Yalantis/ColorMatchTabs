@@ -120,14 +120,14 @@ open class ColorTabs: UIControl {
         highlighterView.layer.add(animation, forKey: nil)
         highlighterView.layer.cornerRadius = targetHeight / 2
         
-        UIView.animate(withDuration: HighlighterAnimationDuration, animations: {
+        UIView.animate(withDuration: HighlighterAnimationDuration) {
             self.highlighterView.frame.size.height = targetHeight
             self.highlighterView.alpha = hidden ? 0 : 1
             
-            for label in self.labels  {
+            for label in self.labels {
                 label.alpha = hidden ? 0 : 1
             }
-        }) 
+        }
     }
     
     open func reloadData() {
@@ -186,7 +186,8 @@ private extension ColorTabs {
 
 private extension ColorTabs {
 
-    @objc func selectButton(_ sender: UIButton) {
+    @objc
+    func selectButton(_ sender: UIButton) {
         if let index = buttons.index(of: sender) {
             selectedSegmentIndex = index
         }
@@ -226,7 +227,7 @@ private extension ColorTabs {
     }
     
     func moveHighlighterView(toItemAt toIndex: Int) {
-        guard let countItems = dataSource?.numberOfItems(inTabSwitcher: self) , countItems > toIndex else {
+        guard let countItems = dataSource?.numberOfItems(inTabSwitcher: self), countItems > toIndex else {
             return
         }
         
