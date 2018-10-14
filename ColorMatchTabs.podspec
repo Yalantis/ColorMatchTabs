@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = "ColorMatchTabs"
-  s.version          = "3.0"
+  s.version          = "3.1"
   s.summary          = "UI animation concept fo review apps."
 
   s.homepage         = "https://github.com/Yalantis/ColorMatchTabs"
