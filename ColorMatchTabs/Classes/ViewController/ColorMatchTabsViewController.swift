@@ -50,7 +50,7 @@ open class ColorMatchTabsViewController: UITabBarController {
         }
     }
     
-    open let titleLabel = UILabel()
+    public let titleLabel = UILabel()
     open var popoverViewController: PopoverViewController? {
         didSet {
             popoverViewController?.menu.dataSource = self
@@ -75,7 +75,7 @@ open class ColorMatchTabsViewController: UITabBarController {
     fileprivate let circleTransition = CircleTransition()
     
     var _view: MenuView! {
-        return view as! MenuView
+        return view as? MenuView
     }
     
     open override func loadView() {

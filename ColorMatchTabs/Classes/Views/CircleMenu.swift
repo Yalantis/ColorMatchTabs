@@ -207,7 +207,7 @@ extension CircleMenu {
                 button.frame = self.targetFrameForItem(at: index)
             })
         }
-        superview.bringSubview(toFront: self)
+        superview.bringSubviewToFront(self)
     }
     
     func hideItems() {

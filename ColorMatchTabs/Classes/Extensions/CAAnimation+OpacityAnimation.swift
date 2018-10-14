@@ -13,7 +13,7 @@ extension CAAnimation {
     static func opacityAnimation(withDuration duration: Double, initialValue: Float, finalValue: Float) -> CAAnimation {
         let opacityAnimation = CABasicAnimation(keyPath: "opacity")
         opacityAnimation.duration = duration
-        opacityAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        opacityAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         opacityAnimation.fromValue = initialValue
         opacityAnimation.toValue = finalValue
 
