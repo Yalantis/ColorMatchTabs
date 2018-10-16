@@ -76,7 +76,7 @@ private extension MenuView {
         
         circleMenuButton = UIButton()
         circleMenuButton.isHidden = true
-        circleMenuButton.setImage(UIImage(namedInCurrentBundle: "circle_menu"), for: UIControlState())
+        circleMenuButton.setImage(UIImage(namedInCurrentBundle: "circle_menu"), for: UIControl.State())
         circleMenuButton.adjustsImageWhenHighlighted = false
         addSubview(circleMenuButton)
     }

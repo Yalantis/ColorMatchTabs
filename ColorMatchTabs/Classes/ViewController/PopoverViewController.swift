@@ -29,7 +29,7 @@ open class PopoverViewController: UIViewController {
     
     open weak var dataSource: PopoverViewControllerDataSource?
     open weak var delegate: PopoverViewControllerDelegate?
-    open let contentView = UIView()
+    public let contentView = UIView()
     
     var highlightedItemIndex: Int!
     let menu: CircleMenu = CircleMenu()

@@ -41,7 +41,7 @@ open class ColorTabs: UIControl {
         let highlighterView = UIView(frame: frame)
         highlighterView.layer.cornerRadius = self.bounds.height / 2
         self.addSubview(highlighterView)
-        self.sendSubview(toBack: highlighterView)
+        self.sendSubviewToBack(highlighterView)
         
         return highlighterView
     }()
@@ -162,7 +162,7 @@ private extension ColorTabs {
     func createButton(forIndex index: Int, withDataSource dataSource: ColorTabsDataSource) -> UIButton {
         let button = UIButton()
         
-        button.setImage(dataSource.tabSwitcher(self, iconAt: index), for: UIControlState())
+        button.setImage(dataSource.tabSwitcher(self, iconAt: index), for: UIControl.State())
         button.setImage(dataSource.tabSwitcher(self, hightlightedIconAt: index), for: .selected)
         button.addTarget(self, action: #selector(selectButton(_:)), for: .touchUpInside)
         
