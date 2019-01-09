@@ -33,10 +33,10 @@ open class ColorTabs: UIControl {
     /// Font for titles.
     open var titleFont: UIFont = .systemFont(ofSize: 14)
     
-    fileprivate let stackView = UIStackView()
-    fileprivate var buttons: [UIButton] = []
-    fileprivate var labels: [UILabel] = []
-    fileprivate(set) lazy var highlighterView: UIView = {
+    private let stackView = UIStackView()
+    private var buttons: [UIButton] = []
+    private var labels: [UILabel] = []
+    private(set) lazy var highlighterView: UIView = {
         let frame = CGRect(origin: CGPoint.zero, size: CGSize(width: 0, height: self.bounds.height))
         let highlighterView = UIView(frame: frame)
         highlighterView.layer.cornerRadius = self.bounds.height / 2
@@ -135,6 +135,8 @@ open class ColorTabs: UIControl {
             return
         }
         
+        buttons.forEach { $0.removeFromSuperview() }
+        labels.forEach { $0.removeFromSuperview() }
         buttons = []
         labels = []
         let count = dataSource.numberOfItems(inTabSwitcher: self)
