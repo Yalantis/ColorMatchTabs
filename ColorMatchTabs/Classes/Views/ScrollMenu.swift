@@ -75,6 +75,10 @@ open class ScrollMenu: UIScrollView {
     
     private func commonInit() {
         isPagingEnabled = true
+        bounces = false
+        if #available(iOS 11.0, *) {
+            contentInsetAdjustmentBehavior = .never
+        }
     }
     
     override open func layoutSubviews() {

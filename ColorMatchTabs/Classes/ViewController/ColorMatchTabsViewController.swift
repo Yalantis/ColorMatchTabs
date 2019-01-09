@@ -71,8 +71,8 @@ open class ColorMatchTabsViewController: UITabBarController {
         return _view.tabs.selectedSegmentIndex
     }
     
-    fileprivate var icons: [UIImageView] = []
-    fileprivate let circleTransition = CircleTransition()
+    private var icons: [UIImageView] = []
+    private let circleTransition = CircleTransition()
     
     var _view: MenuView! {
         return view as? MenuView
