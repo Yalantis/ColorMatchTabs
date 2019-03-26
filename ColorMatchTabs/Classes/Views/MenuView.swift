@@ -10,11 +10,12 @@ import UIKit
 
 class MenuView: UIView {
     
-    internal(set) var navigationBar: UIView!
-    internal(set) var tabs: ColorTabs!
-    internal(set) var scrollMenu: ScrollMenu!
-    internal(set) var circleMenuButton: UIButton!
-    internal var shadowView: VerticalGradientView!
+    private(set) var navigationBar: UIView!
+    private(set) var tabs: ColorTabs!
+    private(set) var scrollMenu: ScrollMenu!
+    private(set) var circleMenuButton: UIButton!
+    
+    private var shadowView: VerticalGradientView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -99,7 +100,7 @@ private extension MenuView {
         tabs.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor).isActive = true
         tabs.topAnchor.constraint(equalTo: navigationBar.topAnchor).isActive = true
         tabs.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor).isActive = true
-        tabs.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        tabs.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: -6).isActive = true
     }
     
     func layoutScrollMenu() {

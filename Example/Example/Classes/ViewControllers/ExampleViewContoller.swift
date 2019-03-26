@@ -20,9 +20,8 @@ class ExampleViewContoller: ColorMatchTabsViewController {
         popoverViewController?.delegate = self
         
         colorMatchTabDataSource = self
-        reloadData()
     }
-
+    
 }
 
 extension ExampleViewContoller: ColorMatchTabsViewControllerDataSource {
@@ -54,7 +53,7 @@ extension ExampleViewContoller: ColorMatchTabsViewControllerDataSource {
 }
 
 extension ExampleViewContoller: PopoverViewControllerDelegate {
-
+    
     func popoverViewController(_ popoverViewController: PopoverViewController, didSelectItemAt index: Int) {
         selectItem(at: index)
     }

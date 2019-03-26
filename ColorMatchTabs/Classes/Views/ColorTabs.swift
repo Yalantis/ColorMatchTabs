@@ -69,7 +69,7 @@ open class ColorTabs: UIControl {
             stackView.frame = bounds
         }
     }
-
+    
     open var selectedSegmentIndex: Int = 0 {
         didSet {
             if oldValue != selectedSegmentIndex {
@@ -135,10 +135,11 @@ open class ColorTabs: UIControl {
             return
         }
         
-        buttons.forEach { $0.removeFromSuperview() }
-        labels.forEach { $0.removeFromSuperview() }
+        selectedSegmentIndex = 0
+        stackView.arrangedSubviews.forEach({ $0.removeFromSuperview() })
         buttons = []
         labels = []
+        
         let count = dataSource.numberOfItems(inTabSwitcher: self)
         for index in 0..<count {
             let button = createButton(forIndex: index, withDataSource: dataSource)
@@ -149,6 +150,8 @@ open class ColorTabs: UIControl {
             labels.append(label)
             stackView.addArrangedSubview(label)
         }
+        stackView.layoutIfNeeded()
+        transition(from: selectedSegmentIndex, to: selectedSegmentIndex)
     }
     
 }
@@ -167,6 +170,7 @@ private extension ColorTabs {
         button.setImage(dataSource.tabSwitcher(self, iconAt: index), for: UIControl.State())
         button.setImage(dataSource.tabSwitcher(self, hightlightedIconAt: index), for: .selected)
         button.addTarget(self, action: #selector(selectButton(_:)), for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFit
         
         return button
     }
@@ -187,7 +191,7 @@ private extension ColorTabs {
 }
 
 private extension ColorTabs {
-
+    
     @objc
     func selectButton(_ sender: UIButton) {
         if let index = buttons.index(of: sender) {
@@ -212,8 +216,6 @@ private extension ColorTabs {
             toLabel.alpha = 1
             toIcon.isSelected = true
             
-            self.stackView.layoutIfNeeded()
-            self.layoutIfNeeded()
             self.moveHighlighterView(toItemAt: toIndex)
         }
         
@@ -232,6 +234,8 @@ private extension ColorTabs {
         guard let countItems = dataSource?.numberOfItems(inTabSwitcher: self), countItems > toIndex else {
             return
         }
+        
+        stackView.layoutIfNeeded()
         
         let toLabel = labels[toIndex]
         let toIcon = buttons[toIndex]
