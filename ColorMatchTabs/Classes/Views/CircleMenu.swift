@@ -54,7 +54,7 @@ open class CircleMenu: UIControl {
             imageView.image = image
         }
     }
-
+    
     fileprivate var visible = false
     fileprivate var buttons: [UIButton] = []
     fileprivate var imageView: UIImageView = UIImageView()
@@ -86,9 +86,9 @@ open class CircleMenu: UIControl {
     override open func didMoveToSuperview() {
         super.didMoveToSuperview()
         
-        buttons.forEach { superview?.addSubview($0) }
+        buttons.filter{ $0.superview == nil }.forEach{ superview?.addSubview($0) }
     }
- 
+    
 }
 
 public extension CircleMenu {
@@ -110,6 +110,7 @@ public extension CircleMenu {
             button.layer.cornerRadius = itemDimension / 2
             button.layer.masksToBounds = true
             
+            superview?.addSubview(button)
             buttons.append(button)
         }
     }
@@ -174,7 +175,7 @@ private extension CircleMenu {
         addSubview(imageView)
         addTarget(self, action: #selector(triggerMenu), for: .touchUpInside)
     }
-        
+    
     func removeOldButtons() {
         self.buttons.forEach {
             $0.removeFromSuperview()

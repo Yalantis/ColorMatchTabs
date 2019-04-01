@@ -11,7 +11,7 @@ import UIKit
 private let ContentPadding: CGFloat = 20
 
 @objc public protocol PopoverViewControllerDelegate: class {
-
+    
     func popoverViewController(_ popoverViewController: PopoverViewController, didSelectItemAt index: Int)
     
 }
@@ -145,7 +145,7 @@ private extension PopoverViewController {
                     } else {
                         iconImageView.image = self.dataSource?.popoverViewController(self, iconAt: index)
                     }
-                },
+            },
                 completion: nil
             )
         }
@@ -164,7 +164,7 @@ private extension PopoverViewController {
                 animations: {
                     iconImageView.center = self.menu.centerOfItem(atIndex: index)
                     iconImageView.image = self.dataSource?.popoverViewController(self, hightlightedIconAt: index)
-                },
+            },
                 completion: nil
             )
         }
@@ -188,7 +188,7 @@ private extension PopoverViewController {
             options: [],
             animations: {
                 self.view.layoutIfNeeded()
-            },
+        },
             completion: nil
         )
     }
@@ -204,7 +204,7 @@ private extension PopoverViewController {
             withDuration: AnimationDuration,
             animations: {
                 self.view.layoutIfNeeded()
-            },
+        },
             completion: nil
         )
     }
@@ -214,10 +214,10 @@ private extension PopoverViewController {
 extension PopoverViewController: CircleMenuDelegate {
     
     public func circleMenuWillDisplayItems(_ circleMenu: CircleMenu) {
-        moveIconsToCircle()
         showContentView()
+        moveIconsToCircle()
     }
-
+    
     public func circleMenuWillHideItems(_ circleMenu: CircleMenu) {
         moveIconsToDefaultPositions()
         hideContentMenu()

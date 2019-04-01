@@ -18,13 +18,13 @@ public protocol ColorMatchTabsViewControllerDataSource: class {
     func tabsViewController(_ controller: ColorMatchTabsViewController, iconAt index: Int) -> UIImage
     func tabsViewController(_ controller: ColorMatchTabsViewController, hightlightedIconAt index: Int) -> UIImage
     func tabsViewController(_ controller: ColorMatchTabsViewController, tintColorAt index: Int) -> UIColor
-
+    
 }
 
 public protocol ColorMatchTabsViewControllerDelegate: class {
     
     func didSelectItemAt(_ index: Int)
-
+    
 }
 
 extension ColorMatchTabsViewControllerDelegate {
@@ -39,6 +39,7 @@ open class ColorMatchTabsViewController: UITabBarController {
         didSet {
             _view.scrollMenu.dataSource = colorMatchTabDataSource == nil ? nil : self
             _view.tabs.dataSource = colorMatchTabDataSource == nil ? nil : self
+            reloadData()
         }
     }
     
@@ -80,7 +81,7 @@ open class ColorMatchTabsViewController: UITabBarController {
     
     open override func loadView() {
         super.loadView()
-        view = MenuView()
+        view = MenuView(frame: view.frame)
     }
     
     open override func viewDidLoad() {
@@ -91,7 +92,6 @@ open class ColorMatchTabsViewController: UITabBarController {
         setupIcons()
         setupScrollMenu()
         setupCircleMenu()
-        updateNavigationBar(forSelectedIndex: 0)
         updateScrollEnabled()
     }
     
@@ -204,11 +204,11 @@ private extension ColorMatchTabsViewController {
                         image = self.colorMatchTabDataSource?.tabsViewController(self, iconAt: index)
                     }
                     iconImageView.image = image
-                },
+            },
                 completion: { _ in
                     self._view.tabs.setIconsHidden(false)
                     iconImageView.isHidden = true
-                }
+            }
             )
         }
     }
@@ -240,7 +240,7 @@ private extension ColorMatchTabsViewController {
                         x: iconImageView.center.x,
                         y: iconImageView.center.y + self.view.frame.height / 2
                     )
-                },
+            },
                 completion: nil
             )
         }
@@ -285,6 +285,8 @@ extension ColorMatchTabsViewController: ScrollMenuDelegate {
 extension ColorMatchTabsViewController: UIViewControllerTransitioningDelegate {
     
     open func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        presented.view.frame = presenting.view.frame
+      
         circleTransition.mode = .show
         circleTransition.startPoint = _view.circleMenuButton.center
         
