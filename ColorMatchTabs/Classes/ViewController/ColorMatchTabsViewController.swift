@@ -285,9 +285,6 @@ extension ColorMatchTabsViewController: ScrollMenuDelegate {
 extension ColorMatchTabsViewController: UIViewControllerTransitioningDelegate {
     
     open func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        presented.view.frame = presenting.view.frame
-        presented.view.layoutIfNeeded()
-        
         circleTransition.mode = .show
         circleTransition.startPoint = _view.circleMenuButton.center
         

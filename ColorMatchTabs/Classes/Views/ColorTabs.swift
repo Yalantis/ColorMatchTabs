@@ -151,7 +151,6 @@ open class ColorTabs: UIControl {
             stackView.addArrangedSubview(label)
         }
         stackView.layoutIfNeeded()
-        transition(from: selectedSegmentIndex, to: selectedSegmentIndex)
     }
     
 }

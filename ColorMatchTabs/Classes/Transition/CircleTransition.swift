@@ -42,7 +42,9 @@ extension CircleTransition: UIViewControllerAnimatedTransitioning {
         if !needShow {
             transitionContext.containerView.addSubview(fromViewController.view)
         }
-        
+      
+        toViewController.view.frame = transitionContext.finalFrame(for: toViewController)
+      
         let animatedViewController = needShow ? toViewController : fromViewController
         let initialRect = CGRect(origin: startPoint, size: CGSize.zero)
         let initialCircleMaskPath = UIBezierPath(ovalIn: initialRect)
