@@ -194,7 +194,7 @@ private extension ColorTabs {
     
     @objc
     func selectButton(_ sender: UIButton) {
-        if let index = buttons.index(of: sender) {
+        if let index = buttons.firstIndex(of: sender) {
             selectedSegmentIndex = index
         }
     }
